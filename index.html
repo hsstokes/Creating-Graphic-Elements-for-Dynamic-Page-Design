@@ -2383,31 +2383,37 @@ function shuffleArray(array) {
 
 // LIGHTBOX FUNCTIONALITY
 function setupLightbox() {
-  // Get all images that should be clickable
-  const images = document.querySelectorAll('.demo-image img, .example-image, .comparison-image, .artist-image img');
+  // Get all images that should be clickable - using more specific selectors
+  const images = document.querySelectorAll('.demo-image img, .artist-image img');
+  const backgroundImages = document.querySelectorAll('.example-image, .comparison-image');
   const lightbox = document.getElementById('imageLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const closeLightbox = document.querySelector('.close-lightbox');
   
-  // Add click handlers to all images
+  // Add click handlers to regular images
   images.forEach(image => {
     image.style.cursor = 'pointer';
     image.addEventListener('click', function() {
-      // If it's a background image, extract the URL
-      if (this.style.backgroundImage) {
-        const bgImg = this.style.backgroundImage.match(/url\(['"]?(.*?)['"]?\)/);
-        if (bgImg && bgImg[1]) {
-          lightboxImg.src = bgImg[1];
-        }
-      } 
-      // If it's a regular image
-      else if (this.src) {
-        lightboxImg.src = this.src;
-      }
-      
-      // Show the lightbox
+      lightboxImg.src = this.src;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden'; // Prevent scrolling while lightbox is open
+    });
+  });
+  
+  // Add click handlers to elements with background-image
+  backgroundImages.forEach(element => {
+    element.style.cursor = 'pointer';
+    element.addEventListener('click', function() {
+      const computedStyle = window.getComputedStyle(this);
+      const bgImage = computedStyle.backgroundImage;
+      
+      if (bgImage && bgImage !== 'none') {
+        // Extract URL from the background-image
+        const url = bgImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+        lightboxImg.src = url;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
     });
   });
   
