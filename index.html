@@ -1146,6 +1146,51 @@
     font-style: normal;
     color: var(--secondary);
   }
+
+  <!-- Add this CSS to the existing <style> section -->
+ .lightbox {
+   display: none;
+   position: fixed;
+   z-index: 1000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.9);
+   justify-content: center;
+   align-items: center;
+ }
+
+ .lightbox.active {
+   display: flex;
+ }
+
+ .lightbox-content {
+   max-width: 90%;
+   max-height: 90%;
+   position: relative;
+ }
+
+ .lightbox-image {
+   max-width: 100%;
+   max-height: 90vh;
+   border: 3px solid white;
+   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+ }
+
+ .close-lightbox {
+   position: absolute;
+   top: -30px;
+   right: 0;
+   color: white;
+   font-size: 28px;
+   font-weight: bold;
+   cursor: pointer;
+ }
+
+ .demo-image {
+   cursor: pointer;
+ }
 </style>
 </head>
 <body>
@@ -1952,6 +1997,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Add this HTML at the end of the <body> tag, just before the closing </div> and before the script -->
+  <div id="imageLightbox" class="lightbox">
+    <div class="lightbox-content">
+      <span class="close-lightbox">&times;</span>
+      <img class="lightbox-image" id="lightboxImg" src="" alt="Enlarged image">
+    </div>
+  </div>
   
   <footer>© 2025 Graphic Elements for Design Documentation</footer>
 </div>
@@ -2320,21 +2373,77 @@
   }
   
   // Helper function to shuffle arrays
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
+}
+
+// LIGHTBOX FUNCTIONALITY
+function setupLightbox() {
+  // Get all images that should be clickable
+  const images = document.querySelectorAll('.demo-image img, .example-image, .comparison-image, .artist-image img');
+  const lightbox = document.getElementById('imageLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const closeLightbox = document.querySelector('.close-lightbox');
   
-  // Initialize everything when the page loads
-  document.addEventListener('DOMContentLoaded', function() {
-    setupTabs();
-    setupMarkMakingCanvas();
-    setupSymbolGallery();
-    initGraphicElementsQuiz();
+  // Add click handlers to all images
+  images.forEach(image => {
+    image.style.cursor = 'pointer';
+    image.addEventListener('click', function() {
+      // If it's a background image, extract the URL
+      if (this.style.backgroundImage) {
+        const bgImg = this.style.backgroundImage.match(/url\(['"]?(.*?)['"]?\)/);
+        if (bgImg && bgImg[1]) {
+          lightboxImg.src = bgImg[1];
+        }
+      } 
+      // If it's a regular image
+      else if (this.src) {
+        lightboxImg.src = this.src;
+      }
+      
+      // Show the lightbox
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling while lightbox is open
+    });
   });
+  
+  // Close lightbox when clicking the close button
+  closeLightbox.addEventListener('click', function() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  });
+  
+  // Close lightbox when clicking outside the image
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+  });
+  
+  // Close lightbox with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+  });
+}
+
+// Initialize everything when the page loads - COMBINED EVENT HANDLER
+document.addEventListener('DOMContentLoaded', function() {
+  setupTabs();
+  setupMarkMakingCanvas();
+  setupSymbolGallery();
+  initGraphicElementsQuiz();
+  setupLightbox(); 
+});
+  
+  
 </script>
 </body>
 </html>
