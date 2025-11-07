@@ -1147,50 +1147,50 @@
     color: var(--secondary);
   }
 
-  <!-- Add this CSS to the existing <style> section -->
- .lightbox {
-   display: none;
-   position: fixed;
-   z-index: 1000;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.9);
-   justify-content: center;
-   align-items: center;
- }
+  /* Lightbox styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+  }
 
- .lightbox.active {
-   display: flex;
- }
+  .lightbox.active {
+    display: flex;
+  }
 
- .lightbox-content {
-   max-width: 90%;
-   max-height: 90%;
-   position: relative;
- }
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+  }
 
- .lightbox-image {
-   max-width: 100%;
-   max-height: 90vh;
-   border: 3px solid white;
-   box-shadow: 0 0 20px rgba(0,0,0,0.5);
- }
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    border: 3px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
 
- .close-lightbox {
-   position: absolute;
-   top: -30px;
-   right: 0;
-   color: white;
-   font-size: 28px;
-   font-weight: bold;
-   cursor: pointer;
- }
+  .close-lightbox {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
- .demo-image {
-   cursor: pointer;
- }
+  .demo-image {
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -2381,19 +2381,28 @@ function shuffleArray(array) {
   return array;
 }
 
-// LIGHTBOX FUNCTIONALITY
+// LIGHTBOX FUNCTIONALITY - CORRECTED VERSION
 function setupLightbox() {
-  // Get all images that should be clickable - using more specific selectors
+  // Get all images that should be clickable
   const images = document.querySelectorAll('.demo-image img, .artist-image img');
   const backgroundImages = document.querySelectorAll('.example-image, .comparison-image');
   const lightbox = document.getElementById('imageLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const closeLightbox = document.querySelector('.close-lightbox');
   
+  // Function to safely close the lightbox
+  function closeLightboxSafely() {
+    lightbox.classList.remove('active');
+    setTimeout(() => {
+      document.body.style.overflow = ''; // Restore scrolling with a slight delay
+    }, 100);
+  }
+  
   // Add click handlers to regular images
   images.forEach(image => {
     image.style.cursor = 'pointer';
-    image.addEventListener('click', function() {
+    image.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default behavior
       lightboxImg.src = this.src;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden'; // Prevent scrolling while lightbox is open
@@ -2403,7 +2412,8 @@ function setupLightbox() {
   // Add click handlers to elements with background-image
   backgroundImages.forEach(element => {
     element.style.cursor = 'pointer';
-    element.addEventListener('click', function() {
+    element.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default behavior
       const computedStyle = window.getComputedStyle(this);
       const bgImage = computedStyle.backgroundImage;
       
@@ -2418,24 +2428,23 @@ function setupLightbox() {
   });
   
   // Close lightbox when clicking the close button
-  closeLightbox.addEventListener('click', function() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
+  closeLightbox.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeLightboxSafely();
   });
   
   // Close lightbox when clicking outside the image
   lightbox.addEventListener('click', function(e) {
     if (e.target === lightbox) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = ''; // Restore scrolling
+      e.preventDefault();
+      closeLightboxSafely();
     }
   });
   
   // Close lightbox with Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = ''; // Restore scrolling
+      closeLightboxSafely();
     }
   });
 }
@@ -2448,8 +2457,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initGraphicElementsQuiz();
   setupLightbox(); 
 });
-  
-  
 </script>
 </body>
 </html>
