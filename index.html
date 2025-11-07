@@ -1,0 +1,2340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creating Graphic Elements for Dynamic Page Design</title>
+<style>
+  :root {
+    --primary: #ea37a3;
+    --primary-light: #fdf1f5;
+    --secondary: #0a8080;
+    --secondary-light: #f5ffff;
+    --dark: #222;
+    --light: #fff;
+    --grid-light: #e0e0e0;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: "Space Mono", "IBM Plex Mono", monospace;
+    background-image:
+      linear-gradient(var(--grid-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-light) 1px, transparent 1px),
+      linear-gradient(#ffeaf5 2px, transparent 2px),
+      linear-gradient(90deg, #ffeaf5 2px, transparent 2px);
+    background-size: 64px 64px, 64px 64px, 320px 320px, 320px 320px;
+    background-attachment: fixed;
+    color: var(--dark);
+    padding: 3vw;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.97);
+    border: 3px double var(--primary);
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    padding: 3rem 4rem;
+    animation: fadeIn 1s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  /* Typography */
+  h1, h2, h3 {
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8em;
+  }
+  
+  h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    border-bottom: 3px dotted var(--secondary);
+    padding-bottom: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  h2 {
+    color: var(--secondary);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    background: var(--primary);
+    margin-right: 10px;
+  }
+  
+  p, li {
+    line-height: 1.7;
+    margin-bottom: 1em;
+  }
+  
+  .highlight {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  /* Content Containers */
+  .module {
+    border: 2px solid var(--secondary);
+    border-radius: 12px;
+    background: #fff;
+    margin: 2rem 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .module-header {
+    background: var(--secondary-light);
+    padding: 1rem 1.5rem;
+    border-bottom: 2px dashed var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .module-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--secondary);
+  }
+  
+  .module-content {
+    padding: 1.5rem;
+  }
+  
+  .content-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .content-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .note {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-light);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    margin: 20px 0 0;
+    border-bottom: 2px solid var(--secondary);
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  
+  .tab {
+    padding: 12px 20px;
+    background: var(--secondary-light);
+    border: 1px solid var(--secondary);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    margin-right: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  
+  .tab:hover {
+    background: #edfafa;
+  }
+  
+  .tab.active {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid var(--secondary);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  /* Tool Highlight Section */
+  .tool-highlight {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px 0;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .tool-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  .tool-title {
+    margin: 0;
+    color: var(--secondary);
+    font-size: 1.2rem;
+  }
+  
+  .tool-steps {
+    padding-left: 20px;
+  }
+  
+  .tool-steps li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  /* Video embedding */
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    margin: 20px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Artist Example Section */
+  .artist-example {
+    margin: 30px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    background: white;
+  }
+  
+  .artist-header {
+    background: var(--primary-light);
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .artist-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .artist-description {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 5px 0 0;
+  }
+  
+  .artist-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .artist-image {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .artist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .artist-image:hover img {
+    transform: scale(1.05);
+  }
+  
+  .artist-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+  }
+  
+  .artist-info h4 {
+    color: var(--secondary);
+    margin: 0 0 15px 0;
+  }
+  
+  .artist-info p {
+    font-size: 0.95rem;
+  }
+  
+  .artist-technique {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 5px;
+  }
+  
+  .image-caption {
+    background: rgba(0,0,0,0.7);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+  
+  @media (max-width: 768px) {
+    .artist-content {
+      flex-direction: column;
+    }
+  }
+
+  /* Before-After Comparison */
+  .before-after-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .before-after-comparison {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .comparison-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .comparison-label {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .comparison-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .comparison-note {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  
+  /* Keyboard Shortcuts */
+  .keyboard-shortcut {
+    display: inline-block;
+    padding: 3px 8px;
+    background: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: "Monaco", "Menlo", monospace;
+    font-size: 0.9em;
+    box-shadow: 0 2px 0 #ccc;
+    margin: 0 2px;
+  }
+  
+  /* Key Takeaways Section with Enhanced Aesthetics */
+  .key-takeaways {
+    margin: 30px 0;
+    background-color: var(--light);
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--primary);
+    position: relative;
+  }
+
+  .key-takeaways h3 {
+    margin-top: 0;
+    color: var(--secondary);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+  }
+
+  .key-takeaways h3::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary), transparent);
+    border-radius: 3px;
+  }
+
+  .key-takeaways-list {
+    list-style-position: outside;
+    padding-left: 30px;
+    margin: 0;
+    counter-reset: key-takeaway;
+  }
+
+  .key-takeaways-list li {
+    margin-bottom: 16px;
+    padding: 0 0 0 10px;
+    line-height: 1.6;
+    position: relative;
+    counter-increment: key-takeaway;
+  }
+
+  .key-takeaways-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .key-takeaways-list li::marker {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .key-takeaways-list li strong {
+    color: var(--dark);
+    font-weight: 700;
+    font-size: 1.05em;
+  }
+
+  .takeaway-dash {
+    color: var(--primary);
+    font-weight: 500;
+    margin: 0 6px;
+    display: inline-block;
+  }
+
+  .takeaway-description {
+    color: var(--dark);
+    opacity: 0.85;
+  }
+
+  /* Hover effect for the takeaway items */
+  .key-takeaways-list li:hover {
+    transform: translateX(3px);
+    transition: transform 0.2s ease;
+  }
+
+  .key-takeaways-list li:hover strong {
+    color: var(--primary);
+    transition: color 0.2s ease;
+  }
+
+  /* Make the container look like it has a slight fold */
+  .key-takeaways::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.05) 50%);
+    border-top-right-radius: 8px;
+  }
+  
+  /* Demo Containers */
+  .demo-container {
+    margin: 25px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  
+  .demo-image {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .demo-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  }
+  
+  .demo-image img {
+    width: 100%;
+    display: block;
+  }
+  
+  .caption {
+    background: #f9f9f9;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: var(--dark);
+    border-top: 1px solid #eee;
+  }
+  
+  /* Design Applications */
+  .application-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+  }
+  
+  .application-card {
+    background: var(--light);
+    border-radius: 10px;
+    border: 1px solid #eee;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .application-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  }
+  
+  .application-card h4 {
+    color: var(--secondary);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  
+  /* Process Steps */
+  .process-steps {
+    margin: 30px 0;
+  }
+  
+  .step-container {
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+  
+  .step-header {
+    background: var(--secondary-light);
+    padding: 15px 20px;
+    border-bottom: 1px dashed var(--secondary);
+    display: flex;
+    align-items: center;
+  }
+  
+  .step-number {
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-weight: bold;
+  }
+  
+  .step-title {
+    margin: 0;
+    color: var(--secondary);
+    font-size: 1.1rem;
+  }
+  
+  .step-content {
+    padding: 20px;
+    background: white;
+  }
+  
+  /* Example Gallery */
+  .example-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+  }
+  
+  .example-card {
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+  
+  .example-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .example-caption {
+    padding: 12px 15px;
+    background: white;
+    font-size: 0.9rem;
+  }
+  
+  /* Canvas for mark-making game */
+  .canvas-container {
+    position: relative;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  #markMakingCanvas {
+    background: white;
+    cursor: crosshair;
+    touch-action: none;
+    width: 100%;
+  }
+  
+  .canvas-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  /* Buttons and Navigation */
+  .btn {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+  }
+
+  .btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Interactive Shortcut Game */
+  .shortcut-game {
+    background: var(--secondary-light);
+    border: 2px solid var(--secondary);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: center;
+  }
+  
+  .shortcut-question {
+    margin-bottom: 20px;
+  }
+  
+  .shortcut-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 600px) {
+    .shortcut-options {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .shortcut-option {
+    background: white;
+    border: 1px solid var(--secondary);
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+  }
+  
+  .shortcut-option:hover:not([disabled]) {
+    background: var(--secondary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  }
+  
+  .shortcut-option.correct {
+    background: #d4f7d4;
+    border-color: #5cb85c;
+  }
+  
+  .shortcut-option.incorrect {
+    background: #f7d4d4;
+    border-color: #d9534f;
+  }
+  
+  .shortcut-feedback {
+    min-height: 2rem;
+    margin: 15px 0;
+    font-weight: bold;
+  }
+  
+  .shortcut-feedback.correct {
+    color: #5cb85c;
+  }
+  
+  .shortcut-feedback.incorrect {
+    color: #d9534f;
+  }
+  
+  .shortcut-score {
+    font-weight: bold;
+    color: var(--secondary);
+    margin-bottom: 15px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    color: #777;
+    font-size: 0.85rem;
+    border-top: 1px dashed var(--primary);
+  }
+  
+  /* Color picker styles */
+  .color-picker {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .color-option:hover {
+    transform: scale(1.1);
+  }
+  
+  .color-option.selected {
+    border: 2px solid var(--dark);
+    transform: scale(1.1);
+  }
+  
+  /* Type on path preview */
+  .path-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    background: #f9f9f9;
+  }
+  
+  .preview-label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--secondary);
+  }
+  
+  .preview-content {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .preview-content svg {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Symbol brush gallery */
+  .symbol-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .symbol-gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .symbol-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 24px;
+  }
+  
+  .symbol-item:hover {
+    background: var(--primary-light);
+    transform: scale(1.05);
+  }
+  
+  .symbol-item.selected {
+    border: 2px solid var(--primary);
+    background: var(--primary-light);
+  }
+  
+  /* NEW STYLES FOR TEACHING STRUCTURE */
+  .teaching-guide {
+    background: #f0f8ff;
+    border: 2px dashed #0a8080;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+  }
+
+  .timeline li {
+    margin-bottom: 10px;
+  }
+
+  .checkpoint {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff9e6;
+    border-left: 5px solid #ffc107;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+
+  .checkpoint-header h3 {
+    color: #d35400;
+    margin-top: 0;
+  }
+
+  .checkpoint-tasks {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+  }
+
+  .extension-activity {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #4caf50;
+  }
+
+  .extension-activity h4 {
+    color: #2e7d32;
+    margin-top: 0;
+  }
+  
+  .instructor-note {
+    background: #e8eaf6;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 3px solid #3f51b5;
+    font-size: 0.9rem;
+  }
+  
+  .poll-template {
+    background: #ede7f6;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px dashed #673ab7;
+  }
+  
+  .instruction-mode {
+    background: #e3f2fd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 20px 0;
+    border-left: 5px solid #2196f3;
+  }
+  
+  .mode-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #0d47a1;
+  }
+  
+  .mode-description {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+  }
+  
+  .experimentation-prompt {
+    background: #f1f8e9;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 30px 0;
+    border: 1px solid #aed581;
+  }
+  
+  .prompt-header h3 {
+    color: #33691e;
+    margin-top: 0;
+  }
+  
+  .prompt-ideas li {
+    margin-bottom: 10px;
+  }
+  
+  .time-indicator {
+    background: #ffebee;
+    color: #c62828;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  /* Visual guide styles for international students */
+  .visual-guide {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .visual-guide .number {
+    background: var(--secondary);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .simplified-poll {
+    background: #f5f6ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid #d4d8f9;
+  }
+
+  .poll-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .step-visual {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .step-visual .icon {
+    font-size: 24px;
+    color: var(--secondary);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+  }
+
+  .workflow-diagram {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+  }
+
+  .workflow-step {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+  }
+
+  .workflow-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--secondary);
+  }
+
+  @media (max-width: 768px) {
+    .workflow-diagram {
+      grid-template-columns: 1fr;
+    }
+    
+    .workflow-step:not(:last-child)::after {
+      content: "↓";
+      right: 50%;
+      top: auto;
+      bottom: -20px;
+      transform: translateX(50%);
+    }
+  }
+  
+  /* Optional badge for drawing extension */
+  .optional-badge {
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Meaning box for conceptual emphasis */
+  .meaning-box {
+    background: linear-gradient(to right, var(--secondary-light), white);
+    border-left: 5px solid var(--secondary);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 25px 0;
+    position: relative;
+  }
+  
+  .meaning-box h3 {
+    color: var(--secondary);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+  
+  .meaning-box p {
+    margin-bottom: 10px;
+  }
+  
+  .meaning-box p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .concept-tag {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .artist-quote {
+    font-style: italic;
+    color: #555;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin: 15px 0;
+    position: relative;
+  }
+  
+  .artist-quote::before {
+    content: """;
+    font-size: 60px;
+    color: rgba(234, 55, 163, 0.2);
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    font-family: Georgia, serif;
+  }
+  
+  .artist-quote p {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .artist-quote .quote-attribution {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--secondary);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- INSTRUCTOR GUIDE - HIDE BEFORE SHARING WITH STUDENTS -->
+  <div class="teaching-guide">
+    <h3>Instructor Guide - Session Structure (2.5 hours)</h3>
+    
+    <!-- Visual Timeline -->
+    <div class="workflow-diagram">
+      <div class="workflow-step">
+        <h4>Watch Demo</h4>
+        <p>Complete demonstration first</p>
+      </div>
+      <div class="workflow-step">
+        <h4>Practice</h4>
+        <p>Students try the techniques</p>
+      </div>
+      <div class="workflow-step">
+        <h4>Check-in</h4>
+        <p>One completion poll at end</p>
+      </div>
+    </div>
+    
+    <div class="instructor-note">
+      <p><strong>Teaching Strategy:</strong> Demonstrate each technique completely without interruption. Allow students to play and experiment during practice time. Use simplified polls only at the end of each major section.</p>
+      <p><em>Note: This section is for instructor reference only - hide before sharing with students</em></p>
+      <p><strong>Conceptual Focus:</strong> Emphasize that mark-making is not merely decorative but conveys meaning. Guide students to consider how their marks support their overall design concept.</p>
+    </div>
+  </div>
+
+  <h1>Creating Graphic Elements for Dynamic Page Design</h1>
+  
+  <div class="visual-guide">
+    <div class="number">!</div>
+    <p>Learn how to create unique graphic elements - <strong>no drawing skills required!</strong></p>
+  </div>
+  
+  <!-- MODULE 1: WHY GRAPHIC ELEMENTS MATTER -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Why Graphic Elements Matter</h2>
+    </div>
+    <div class="module-content">
+      <!-- Visual Guide -->
+      <div class="example-gallery">
+        <div class="example-card">
+          <div class="example-image" style="background-image: url('example-1.jpg')"></div>
+          <div class="example-caption">With graphic elements</div>
+        </div>
+        <div class="example-card">
+          <div class="example-image" style="background-image: url('example-2.jpg')"></div>
+          <div class="example-caption">Without graphic elements</div>
+        </div>
+      </div>
+      
+      <div class="key-takeaways">
+        <h3>Benefits of Graphic Elements:</h3>
+        <ol class="key-takeaways-list">
+          <li><strong>Guide the eye</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Help viewers follow your work</span></li>
+          <li><strong>Show connections</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Connect different ideas visually</span></li>
+          <li><strong>Create hierarchy</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Highlight what's most important</span></li>
+          <li><strong>Add personality</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Make your work stand out</span></li>
+          <li><strong>Convey meaning</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Express concepts through visual language</span></li>
+        </ol>
+      </div>
+      
+      <!-- New section on mark-making and meaning -->
+      <div class="meaning-box">
+        <h3><span class="concept-tag">Key concept</span> Mark-Making as Meaning</h3>
+        <p>The graphic elements we create are not merely decorative flourishes. They function as a form of visual communication, carrying and reinforcing meaning within your design.</p>
+        <p>Each mark, pattern, and line communicates through its visual qualities—its rhythm, density, direction, and character. As you create these elements, consider what they express about your content's tone, emotion, and conceptual framework.</p>
+      </div>
+      
+      <div class="artist-quote">
+        <p>"The way I work is not to try to follow the rules, but to understand the rules and then figure out how to break them. I'm interested in pushing typography to places where it hasn't been pushed before."</p>
+        <span class="quote-attribution">— David Carson, Designer</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 2: APPROACHES TO CREATING GRAPHIC ELEMENTS -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Three Techniques You'll Learn Today</h2>
+    </div>
+    <div class="module-content">
+      <!-- Tabs Navigation -->
+      <div class="tabs" id="approachTabs">
+        <div class="tab active" data-tab="typeOnPath">Type on Path</div>
+        <div class="tab" data-tab="keyboardMarking">Keyboard Mark-Making</div>
+        <div class="tab" data-tab="symbolBrushes">Symbol Brushes</div>
+      </div>
+      
+      <!-- Tab Content -->
+      <div id="typeOnPath" class="tab-content active">
+        <div class="step-visual">
+          <div class="icon">1</div>
+          <h3>Type on Path</h3>
+        </div>
+        
+        <div class="example-gallery">
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('type-path-1.jpg')"></div>
+          </div>
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('type-path-2.jpg')"></div>
+          </div>
+        </div>
+        
+        <div class="meaning-box">
+          <p>Type on a path can convey motion, flow, or create boundaries. Consider how the rhythm of repeating characters can express energy, calmness, or tension depending on your choice of characters and path shape.</p>
+        </div>
+      </div>
+      
+      <div id="keyboardMarking" class="tab-content">
+        <div class="step-visual">
+          <div class="icon">2</div>
+          <h3>Keyboard Mark-Making</h3>
+        </div>
+        
+        <div class="example-gallery">
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('keyboard-marks-1.jpg')"></div>
+          </div>
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('keyboard-marks-2.jpg')"></div>
+          </div>
+        </div>
+        
+        <div class="meaning-box">
+          <p>Different keyboard characters carry distinct visual qualities—slashes feel dynamic and active, while equals signs suggest structure and stability. Choose characters that reinforce your content's meaning.</p>
+        </div>
+      </div>
+      
+      <div id="symbolBrushes" class="tab-content">
+        <div class="step-visual">
+          <div class="icon">3</div>
+          <h3>Symbol Brushes</h3>
+        </div>
+        
+        <div class="example-gallery">
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('symbol-brush-1.jpg')"></div>
+          </div>
+          <div class="example-card">
+            <div class="example-image" style="background-image: url('symbol-brush-2.jpg')"></div>
+          </div>
+        </div>
+        
+        <div class="meaning-box">
+          <p>Symbol brushes let you create repeating patterns that can represent concepts like growth, connection, or transformation. The symbols you select and how they interact creates layers of visual meaning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 3: TYPE ON PATH TECHNIQUE -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Technique 1: Type on Path</h2>
+    </div>
+    <div class="module-content">
+      <div class="instruction-mode">
+        <div class="mode-label">👁️ WATCH DEMONSTRATION</div>
+      </div>
+      
+      <!-- Video Embed -->
+      <div class="video-container">
+        <iframe src="PANOPTO_EMBED_URL_FOR_TYPE_ON_PATH" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+      </div>
+      
+      <!-- Artist Example with Visual Focus -->
+      <div class="artist-example">
+        <div class="artist-header">
+          <h3 class="artist-name">Ed Fella</h3>
+          <p class="artist-description">Known for experimental, hand-drawn typography that deliberately breaks conventional design rules</p>
+        </div>
+        <div class="artist-content">
+          <div class="artist-image">
+            <img src="fella-example.jpg" alt="Ed Fella's experimental typography">
+          </div>
+          <div class="artist-info">
+            <h4>Breaking Typographic Conventions</h4>
+            <p class="artist-technique">Approach to Type on Path:</p>
+            <p>Ed Fella's work blends vernacular influences, folk art aesthetics, and expressive mark-making to create unique typographic landscapes. His hand-drawn letterforms often follow irregular paths and challenge traditional notions of legibility while still communicating effectively.</p>
+            <p>Fella's work demonstrates how type can function simultaneously as both language and visual form, showing that the path itself becomes part of the message.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Meaning section for Type on Path -->
+      <div class="meaning-box">
+        <h3>Expressive Qualities of Type on Path</h3>
+        <p>When placing type on a path, consider what the shape expresses:</p>
+        <ul>
+          <li><strong>Curves:</strong> Suggest movement, flow, organic qualities</li>
+          <li><strong>Straight lines:</strong> Communicate structure, stability, formality</li>
+          <li><strong>Circular paths:</strong> Can represent unity, completion, continuity</li>
+          <li><strong>Character choice:</strong> Affects the texture and emotional tone (angular vs. flowing)</li>
+        </ul>
+        <p>Ask yourself: How does the path shape and character selection reinforce the content's meaning?</p>
+      </div>
+      
+      <!-- Process Steps with Visual Focus -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon">1</div>
+          <h3 class="tool-title">Create a Path</h3>
+        </div>
+        <div class="step-visual">
+          <div class="icon">→</div>
+          <p>Use Pen Tool (<span class="keyboard-shortcut">P</span>)</p>
+        </div>
+        <div class="step-visual">
+          <div class="icon">→</div>
+          <p>Click and drag to make a curved line</p>
+        </div>
+      </div>
+      
+      <!-- Step 2 -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon">2</div>
+          <h3 class="tool-title">Choose Characters</h3>
+        </div>
+        
+        <div class="symbol-gallery">
+          <div class="symbol-item" data-symbol="~~~~~~~~~~~">~</div>
+          <div class="symbol-item" data-symbol="***********">*</div>
+          <div class="symbol-item" data-symbol="===========">═</div>
+          <div class="symbol-item" data-symbol="////////////">/</div>
+        </div>
+      </div>
+      
+      <!-- Step 3 -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon">3</div>
+          <h3 class="tool-title">Apply Type to Path</h3>
+        </div>
+        <div class="step-visual">
+          <div class="icon">→</div>
+          <p>Select Type Tool (<span class="keyboard-shortcut">T</span>)</p>
+        </div>
+        <div class="step-visual">
+          <div class="icon">→</div>
+          <p>Click on path and type characters</p>
+        </div>
+      </div>
+      
+      <!-- Visual Example -->
+      <div class="path-preview">
+        <div class="preview-content">
+          <svg width="500" height="150" viewBox="0 0 500 150">
+            <path id="curve" d="M73,73 C73,73 150,10 250,10 C350,10 427,73 427,73" fill="transparent"/>
+            <text>
+              <textPath href="#curve" startOffset="0%">*********************************************</textPath>
+            </text>
+            
+            <path id="curve2" d="M73,123 C73,123 150,60 250,60 C350,60 427,123 427,123" fill="transparent"/>
+            <text>
+              <textPath href="#curve2" startOffset="0%">&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&</textPath>
+            </text>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Step 4 with Visual Guide -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon">4</div>
+          <h3 class="tool-title">Create Variations</h3>
+        </div>
+        
+        <div class="before-after-comparison">
+          <div class="comparison-item">
+            <div class="comparison-image" style="background-image: url('type-variation-1.jpg')"></div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-image" style="background-image: url('type-variation-2.jpg')"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 5 with Visual Guide -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon">5</div>
+          <h3 class="tool-title">Convert to Shapes</h3>
+        </div>
+        
+        <div class="before-after-comparison">
+          <div class="comparison-item">
+            <div class="comparison-label">Before</div>
+            <div class="comparison-image" style="background-image: url('type-on-path.jpg')"></div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">After</div>
+            <div class="comparison-image" style="background-image: url('type-to-shapes.jpg')"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CHECKPOINT 1 - Simplified -->
+      <div class="simplified-poll">
+        <h4>✓ Completed Type on Path?</h4>
+        <div class="poll-options">
+          <button class="btn btn-sm">Complete</button>
+          <button class="btn btn-sm">Need Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 4: KEYBOARD MARK-MAKING -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Technique 2: Keyboard Mark-Making</h2>
+    </div>
+    <div class="module-content">
+      <div class="instruction-mode">
+        <div class="mode-label">👁️ WATCH DEMONSTRATION</div>
+      </div>
+      
+      <!-- Video Embed -->
+      <div class="video-container">
+        <iframe src="PANOPTO_EMBED_URL_FOR_KEYBOARD_MARKING" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+      </div>
+      
+      <!-- Artist Example with David Carson -->
+      <div class="artist-example">
+        <div class="artist-header">
+          <h3 class="artist-name">David Carson</h3>
+          <p class="artist-description">Revolutionized graphic design in the 1990s with his experimental typography in Ray Gun magazine</p>
+        </div>
+        <div class="artist-content">
+          <div class="artist-image">
+            <img src="carson-example.jpg" alt="David Carson's experimental typography">
+          </div>
+          <div class="artist-info">
+            <h4>Typographic Disruption</h4>
+            <p class="artist-technique">Approach to Mark-Making:</p>
+            <p>Carson's work is characterized by intuitive, non-grid layouts, distorted type, and layered compositions that prioritize emotional response over traditional legibility. His willingness to deconstruct letterforms and create new visual languages from typographic elements demonstrates the potential of mark-making approaches.</p>
+            <p>Carson's keyboard mark-making often creates rhythmic patterns that guide the eye in unconventional ways, challenging how we read and process information.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Meaning section for Keyboard Mark-Making -->
+      <div class="meaning-box">
+        <h3>Expressive Qualities of Keyboard Marks</h3>
+        <p>Different characters create different visual effects and can convey specific qualities:</p>
+        <ul>
+          <li><strong>/ (slashes):</strong> Dynamic, energetic, suggest movement</li>
+          <li><strong>= (equals):</strong> Structured, methodical, stable</li>
+          <li><strong>~ (tildes):</strong> Flowing, undulating, gentle</li>
+          <li><strong>| (vertical bars):</strong> Strong, authoritative, rigid</li>
+          <li><strong>* (asterisks):</strong> Playful, sparkly, attention-grabbing</li>
+        </ul>
+        <p>The density, spacing, and arrangement of your marks further influences their expressive quality.</p>
+      </div>
+      
+      <!-- Interactive Canvas - Keeping the Interactive Element -->
+      <div class="tool-highlight">
+        <div class="tool-header">
+          <div class="tool-icon"><i>Aa</i></div>
+          <h3 class="tool-title">Try Keyboard Mark-Making</h3>
+        </div>
+        
+        <!-- Character Selection -->
+        <div>
+          <select id="characterSelect" class="form-control">
+            <option value="*">* (Asterisk)</option>
+            <option value="~">~ (Tilde)</option>
+            <option value="=">=  (Equals)</option>
+            <option value="+"">+ (Plus)</option>
+            <option value="/"">/ (Slash)</option>
+            <option value="|">| (Vertical bar)</option>
+            <option value="-">- (Dash)</option>
+            <option value="o">o (Lowercase o)</option>
+          </select>
+        </div>
+        
+        <!-- Canvas for mark-making -->
+        <div class="canvas-container">
+          <canvas id="markMakingCanvas" width="800" height="400"></canvas>
+        </div>
+        
+        <div class="canvas-controls">
+          <button class="btn" id="clearCanvas">Clear Canvas</button>
+          <button class="btn btn-primary" id="saveCanvas">Save as Image</button>
+          <div class="color-picker" id="colorPicker">
+            <div class="color-option selected" style="background-color: #000000;" data-color="#000000"></div>
+            <div class="color-option" style="background-color: #ea37a3;" data-color="#ea37a3"></div>
+            <div class="color-option" style="background-color: #0a8080;" data-color="#0a8080"></div>
+            <div class="color-option" style="background-color: #5c5ce0;" data-color="#5c5ce0"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Visual Implementation Steps -->
+      <h3>How to Do This in Photoshop</h3>
+      
+      <div class="workflow-diagram">
+        <div class="workflow-step">
+          <div class="number">1</div>
+          <p>Create text layer with Type Tool (<span class="keyboard-shortcut">T</span>)</p>
+        </div>
+        <div class="workflow-step">
+          <div class="number">2</div>
+          <p>Type repeating characters (//////// or *******)</p>
+        </div>
+        <div class="workflow-step">
+          <div class="number">3</div>
+          <p>Transform with <span class="keyboard-shortcut">Ctrl/Cmd+T</span></p>
+        </div>
+      </div>
+      
+      <!-- Visual Examples -->
+      <div class="before-after-comparison">
+        <div class="comparison-item">
+          <div class="comparison-image" style="background-image: url('keyboard-pattern-1.jpg')"></div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-image" style="background-image: url('keyboard-pattern-2.jpg')"></div>
+        </div>
+      </div>
+      
+      <!-- CHECKPOINT 2 - Simplified -->
+      <div class="simplified-poll">
+        <h4>✓ Completed Keyboard Mark-Making?</h4>
+        <div class="poll-options">
+          <button class="btn btn-sm">Complete</button>
+          <button class="btn btn-sm">Need Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 5: SYMBOL BRUSHES -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Technique 3: Symbol Brushes</h2>
+    </div>
+    <div class="module-content">
+      <div class="instruction-mode">
+        <div class="mode-label">👁️ WATCH DEMONSTRATION</div>
+      </div>
+      
+      <!-- Video Embed -->
+      <div class="video-container">
+        <iframe src="PANOPTO_EMBED_URL_FOR_SYMBOL_BRUSHES" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+      </div>
+      
+      <!-- Artist Example with Ed Fella - showing different aspect of his work -->
+      <div class="artist-example">
+        <div class="artist-header">
+          <h3 class="artist-name">Ed Fella</h3>
+          <p class="artist-description">Creating meaningful patterns with repeating elements</p>
+        </div>
+        <div class="artist-content">
+          <div class="artist-image">
+            <img src="fella-example.jpg" alt="Ed Fella's pattern work">
+          </div>
+          <div class="artist-info">
+            <h4>Rhythm and Pattern</h4>
+            <p class="artist-technique">Approach to Symbol Brushes:</p>
+            <p>In addition to his experimental typography, Fella often uses repeating elements along paths to create borders, decorative elements, and visual textures. His hand-drawn approach to these patterns shows how simple symbols can create rich visual language when arranged with intention.</p>
+            <p>Fella's pattern work demonstrates that imperfection and inconsistency often add character and humanity to graphic elements.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Meaning section for Symbol Brushes -->
+      <div class="meaning-box">
+        <h3>Creating Meaning with Symbol Brushes</h3>
+        <p>Symbol brushes can express specific qualities through their form and arrangement:</p>
+        <ul>
+          <li><strong>Direction:</strong> Establishes flow and movement through your design</li>
+          <li><strong>Density:</strong> Creates areas of visual weight and emphasis</li>
+          <li><strong>Rhythm:</strong> Regular or irregular spacing affects the tempo and mood</li>
+          <li><strong>Scale variation:</strong> Can suggest depth, hierarchy, or transformation</li>
+        </ul>
+        <p>Consider how your symbol brushes interact with content elements to reinforce or contrast with their meaning.</p>
+      </div>
+      
+      <!-- Visual Process Steps -->
+      <div class="workflow-diagram">
+        <div class="workflow-step">
+          <div class="number">1</div>
+          <p>Create character with Type Tool</p>
+        </div>
+        <div class="workflow-step">
+          <div class="number">2</div>
+          <p>Convert to Brush (<span class="keyboard-shortcut">Edit → Define Brush</span>)</p>
+        </div>
+        <div class="workflow-step">
+          <div class="number">3</div>
+          <p>Apply to paths with Brush Tool</p>
+        </div>
+      </div>
+      
+      <!-- Visual Examples -->
+      <div class="before-after-comparison">
+        <div class="comparison-item">
+          <div class="comparison-label">Default Brush</div>
+          <div class="comparison-image" style="background-image: url('symbol-brush-default.jpg')"></div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Custom Settings</div>
+          <div class="comparison-image" style="background-image: url('symbol-brush-custom.jpg')"></div>
+        </div>
+      </div>
+      
+      <!-- Applications with Visual Focus -->
+      <div class="application-grid">
+        <div class="application-card">
+          <h4>Create Borders</h4>
+          <div class="example-image" style="background-image: url('border-example.jpg'); height: 120px;"></div>
+        </div>
+        
+        <div class="application-card">
+          <h4>Form Connectors</h4>
+          <div class="example-image" style="background-image: url('connector-example.jpg'); height: 120px;"></div>
+        </div>
+      </div>
+      
+      <!-- CHECKPOINT 3 - Simplified -->
+      <div class="simplified-poll">
+        <h4>✓ Completed Symbol Brushes?</h4>
+        <div class="poll-options">
+          <button class="btn btn-sm">Complete</button>
+          <button class="btn btn-sm">Need Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 6: HAND-DRAWING EXTENSION (OPTIONAL) -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">
+        Using Hand Drawings on Paths
+        <span class="optional-badge">Optional</span>
+      </h2>
+    </div>
+    <div class="module-content">
+      <div class="note">
+        <p><strong>Note:</strong> This section is completely optional. The three techniques you've already learned work perfectly without any drawing skills!</p>
+      </div>
+      
+      <!-- David Carson Artist Example for Hand Drawing -->
+      <div class="artist-example">
+        <div class="artist-header">
+          <h3 class="artist-name">David Carson</h3>
+          <p class="artist-description">Combining digital and hand-drawn elements</p>
+        </div>
+        <div class="artist-content">
+          <div class="artist-image">
+            <img src="carson-example.jpg" alt="David Carson's mixed-media work">
+          </div>
+          <div class="artist-info">
+            <h4>Hybrid Approach</h4>
+            <p class="artist-technique">Digital/Analog Integration:</p>
+            <p>Carson's work often combines digital typography with hand-drawn or analog elements to create rich, layered compositions. His approach demonstrates how imperfection and spontaneity can bring humanity to digital design.</p>
+            <p>By scanning hand-drawn elements and incorporating them into digital layouts, Carson creates work that feels both contemporary and tactile.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Meaning section for Hand Drawing -->
+      <div class="meaning-box">
+        <h3>Expressive Quality of Hand-Drawn Elements</h3>
+        <p>Hand-drawn marks add a human touch and personality that can convey specific qualities:</p>
+        <ul>
+          <li><strong>Texture:</strong> Adds tactile quality and material sensibility</li>
+          <li><strong>Imperfection:</strong> Creates authenticity and approachability</li>
+          <li><strong>Uniqueness:</strong> Distinguishes your work with personal expression</li>
+        </ul>
+        <p>Even simple hand-drawn marks can carry deep expressive meaning through their quality and character.</p>
+      </div>
+      
+      <!-- Visual Path to Create Drawing Brushes -->
+      <div class="tabs" id="drawingTabs">
+        <div class="tab active" data-tab="drawingBrush">Method 1: Drawing as Brush</div>
+        <div class="tab" data-tab="drawingPattern">Method 2: Drawing as Pattern</div>
+      </div>
+      
+      <div id="drawingBrush" class="tab-content active">
+        <div class="workflow-diagram">
+          <div class="workflow-step">
+            <div class="number">1</div>
+            <p>Create drawing with black pen on white paper</p>
+          </div>
+          <div class="workflow-step">
+            <div class="number">2</div>
+            <p>Scan at 300 DPI</p>
+          </div>
+          <div class="workflow-step">
+            <div class="number">3</div>
+            <p>Remove white background</p>
+          </div>
+        </div>
+        
+        <div class="tool-highlight">
+          <div class="tool-header">
+            <div class="tool-icon">1</div>
+            <h3 class="tool-title">Remove White Background</h3>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Use <span class="keyboard-shortcut">Rectangular Marquee Tool (M)</span> to select a small white area</p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Go to <span class="keyboard-shortcut">Select → Similar</span></p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Press <span class="keyboard-shortcut">Delete</span> to remove white</p>
+          </div>
+        </div>
+        
+        <div class="tool-highlight">
+          <div class="tool-header">
+            <div class="tool-icon">2</div>
+            <h3 class="tool-title">Create Brush from Drawing</h3>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Select all (<span class="keyboard-shortcut">Ctrl/Cmd+A</span>)</p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Go to <span class="keyboard-shortcut">Edit → Define Brush Preset</span></p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Name your brush and click OK</p>
+          </div>
+        </div>
+        
+        <div class="before-after-comparison">
+          <div class="comparison-item">
+            <div class="comparison-label">Original Drawing</div>
+            <div class="comparison-image" style="background-image: url('assets/extensions/drawing-original.jpg')"></div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Applied as Brush on Path</div>
+            <div class="comparison-image" style="background-image: url('assets/extensions/drawing-brush-path.jpg')"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="drawingPattern" class="tab-content">
+        <div class="workflow-diagram">
+          <div class="workflow-step">
+            <div class="number">1</div>
+            <p>Create and scan drawing (same as Method 1)</p>
+          </div>
+          <div class="workflow-step">
+            <div class="number">2</div>
+            <p>Define as pattern</p>
+          </div>
+          <div class="workflow-step">
+            <div class="number">3</div>
+            <p>Apply pattern to path</p>
+          </div>
+        </div>
+        
+        <div class="tool-highlight">
+          <div class="tool-header">
+            <div class="tool-icon">1</div>
+            <h3 class="tool-title">Create Pattern from Drawing</h3>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Clean up drawing with <span class="keyboard-shortcut">Levels</span> to increase contrast</p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Select all (<span class="keyboard-shortcut">Ctrl/Cmd+A</span>)</p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Go to <span class="keyboard-shortcut">Edit → Define Pattern</span></p>
+          </div>
+        </div>
+        
+        <div class="tool-highlight">
+          <div class="tool-header">
+            <div class="tool-icon">2</div>
+            <h3 class="tool-title">Apply Pattern to Path</h3>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Create path with <span class="keyboard-shortcut">Pen Tool (P)</span></p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Right-click on path and select <span class="keyboard-shortcut">Make Selection</span></p>
+          </div>
+          <div class="step-visual">
+            <div class="icon">→</div>
+            <p>Go to <span class="keyboard-shortcut">Edit → Fill</span> and choose your pattern</p>
+          </div>
+        </div>
+        
+        <div class="before-after-comparison">
+          <div class="comparison-item">
+            <div class="comparison-label">Original Drawing</div>
+            <div class="comparison-image" style="background-image: url('assets/extensions/drawing-original.jpg')"></div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Applied as Pattern on Path</div>
+            <div class="comparison-image" style="background-image: url('assets/extensions/drawing-pattern-path.jpg')"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="key-takeaways">
+        <h3>Drawing Tips:</h3>
+        <ol class="key-takeaways-list">
+          <li><strong>Use black pen</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Fine-tipped pen on white paper works best</span></li>
+          <li><strong>Keep it simple</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Simple drawings convert to better brushes</span></li>
+          <li><strong>High contrast</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Clear black lines with white background</span></li>
+          <li><strong>Small size</strong> <span class="takeaway-dash">—</span> <span class="takeaway-description">Keep drawings around 5cm x 5cm</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 7: EXPERIMENTATION TIME -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Now Try It Yourself!</h2>
+    </div>
+    <div class="module-content">      
+      <div class="experimentation-prompt">
+        <div class="prompt-header">
+          <h3>🧪 Final Project</h3>
+        </div>
+        
+        <div class="visual-guide">
+          <div class="number">1</div>
+          <p>Create a design using at least two techniques</p>
+        </div>
+        <div class="visual-guide">
+          <div class="number">2</div>
+          <p>Experiment and play with different options</p>
+        </div>
+        <div class="visual-guide">
+          <div class="number">3</div>
+          <p>Upload your creation to Padlet when finished</p>
+        </div>
+      </div>
+      
+      <div class="meaning-box">
+        <h3>Consider the Meaning in Your Mark-Making</h3>
+        <p>As you create your final project, ask yourself:</p>
+        <ul>
+          <li><strong>What concept or mood am I trying to express?</strong></li>
+          <li><strong>How do my chosen marks reinforce this meaning?</strong></li>
+          <li><strong>What visual qualities (rhythm, density, direction) enhance my message?</strong></li>
+        </ul>
+        <p>Remember: Your graphic elements aren't just decorations—they're a visual language that communicates alongside your other design elements.</p>
+      </div>
+      
+      <div class="artist-quote">
+        <p>"The more I've worked with computers, the more I became convinced the most interesting use of them is to explore what can only be done with computers, not to imitate what's been done before without computers."</p>
+        <span class="quote-attribution">— David Carson, Designer</span>
+      </div>
+      
+      <div class="note">
+        <p>👉 <strong>Remember:</strong> The goal is to play and experiment! There are no wrong answers.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODULE 8: INTERACTIVE KNOWLEDGE CHECK -->
+  <div class="module">
+    <div class="module-header">
+      <h2 class="module-title">Test Your Knowledge</h2>
+    </div>
+    <div class="module-content">
+      <!-- Quiz Game - Keeping the Interactive Element -->
+      <div class="shortcut-game" id="graphicElementsGame">
+        <h3>🎮 Quick Quiz</h3>
+        
+        <div class="shortcut-question">
+          <div id="currentQuestion">Loading question...</div>
+        </div>
+        
+        <div class="shortcut-options" id="answerOptions">
+          <!-- Options will be filled by JavaScript -->
+        </div>
+        
+        <div class="shortcut-feedback" id="gameFeedback"></div>
+        <div class="shortcut-score" id="gameScore">Score: 0 / 0</div>
+        
+        <button class="btn btn-primary" id="nextQuestion" style="display: none;">Next Question</button>
+      </div>
+    </div>
+  </div>
+  
+  <footer>© 2025 Graphic Elements for Design Documentation</footer>
+</div>
+
+<script>
+  // TAB NAVIGATION
+  function setupTabs() {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Find the parent tabs container
+        const parentContainer = tab.parentElement;
+        // Find the associated tab contents based on the parent container
+        let tabContents;
+        
+        if (parentContainer.id === 'approachTabs') {
+          tabContents = document.querySelectorAll('#typeOnPath, #keyboardMarking, #symbolBrushes');
+        } else if (parentContainer.id === 'drawingTabs') {
+          tabContents = document.querySelectorAll('#drawingBrush, #drawingPattern');
+        }
+        
+        const targetId = tab.getAttribute('data-tab');
+        
+        // Update active tab within this tab set
+        parentContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show corresponding content
+        if (tabContents) {
+          tabContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === targetId) {
+              content.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+  }
+  
+  // MARK-MAKING CANVAS
+  function setupMarkMakingCanvas() {
+    const canvas = document.getElementById('markMakingCanvas');
+    const ctx = canvas.getContext('2d');
+    const clearButton = document.getElementById('clearCanvas');
+    const saveButton = document.getElementById('saveCanvas');
+    const colorOptions = document.querySelectorAll('.color-option');
+    const characterSelect = document.getElementById('characterSelect');
+    
+    // Set initial state
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let currentColor = '#000000';
+    let currentCharacter = '*';
+    
+    // Adjust canvas size to fit container
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      canvas.width = container.clientWidth;
+      canvas.height = 400;
+      
+      // Clear and set white background
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Initial setup
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Drawing functions
+    function startDrawing(e) {
+      isDrawing = true;
+      [lastX, lastY] = getCoordinates(e);
+      drawCharacter(lastX, lastY); // Draw the first character immediately
+    }
+    
+    function stopDrawing() {
+      isDrawing = false;
+    }
+    
+    function draw(e) {
+      if (!isDrawing) return;
+      
+      const [currentX, currentY] = getCoordinates(e);
+      const distance = Math.sqrt((currentX - lastX) ** 2 + (currentY - lastY) ** 2);
+      
+      // Only draw if we've moved at least 15 pixels
+      if (distance > 15) {
+        drawCharacter(currentX, currentY);
+        lastX = currentX;
+        lastY = currentY;
+      }
+    }
+    
+    function drawCharacter(x, y) {
+      ctx.fillStyle = currentColor;
+      ctx.font = '20px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(currentCharacter, x, y);
+    }
+    
+    // Get coordinates for mouse or touch
+    function getCoordinates(e) {
+      if (e.type.includes('touch')) {
+        return [
+          e.touches[0].clientX - canvas.getBoundingClientRect().left,
+          e.touches[0].clientY - canvas.getBoundingClientRect().top
+        ];
+      } else {
+        return [
+          e.offsetX,
+          e.offsetY
+        ];
+      }
+    }
+    
+    // Event listeners
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('touchstart', startDrawing);
+    
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('touchmove', draw);
+    
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('touchend', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+    
+    // Color picker
+    colorOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        colorOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        currentColor = option.getAttribute('data-color');
+      });
+    });
+    
+    // Character select
+    characterSelect.addEventListener('change', () => {
+      currentCharacter = characterSelect.value;
+    });
+    
+    // Clear canvas
+    clearButton.addEventListener('click', () => {
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+    
+    // Save canvas
+    saveButton.addEventListener('click', () => {
+      try {
+        const link = document.createElement('a');
+        link.download = 'keyboard-mark-making.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      } catch (e) {
+        alert('Sorry, your browser does not support downloading images.');
+      }
+    });
+  }
+  
+  // SYMBOL ITEM SELECTION
+  function setupSymbolGallery() {
+    const symbols = document.querySelectorAll('.symbol-item');
+    
+    symbols.forEach(symbol => {
+      symbol.addEventListener('click', () => {
+        // Toggle selection
+        if (symbol.classList.contains('selected')) {
+          symbol.classList.remove('selected');
+        } else {
+          symbols.forEach(s => s.classList.remove('selected'));
+          symbol.classList.add('selected');
+        }
+      });
+    });
+  }
+  
+  // GRAPHIC ELEMENTS QUIZ
+  const quizQuestions = [
+    {
+      question: "Which approach is best for creating fluid lines that follow a specific path?",
+      options: ["Keyboard Mark-Making", "Type on Path", "Traditional Drawing", "Grid Layout"],
+      correctAnswer: "Type on Path"
+    },
+    {
+      question: "When creating type on path, how should you primarily think of characters?",
+      options: ["Only as carriers of literal text meaning", "As visual elements with both form and expressive qualities", "As secondary to color choices", "As placeholders until final copy is ready"],
+      correctAnswer: "As visual elements with both form and expressive qualities"
+    },
+    {
+      question: "What font type works best for keyboard mark-making patterns?",
+      options: ["Script fonts", "Serif fonts", "Sans-serif fonts", "Monospaced fonts"],
+      correctAnswer: "Monospaced fonts"
+    },
+    {
+      question: "What is the benefit of converting type to shapes in Photoshop?",
+      options: ["Reduces file size", "Improves rendering speed", "Allows for distortion and manipulation", "Improves color accuracy"],
+      correctAnswer: "Allows for distortion and manipulation"
+    },
+    {
+      question: "Which tool is used to create paths for your symbol brush to follow?",
+      options: ["Marquee Tool", "Pen Tool", "Crop Tool", "Clone Stamp"],
+      correctAnswer: "Pen Tool"
+    },
+    {
+      question: "When preparing a hand drawing for use as a brush, what must be removed?",
+      options: ["Black lines", "White background", "Path outlines", "Brush settings"],
+      correctAnswer: "White background"
+    },
+    {
+      question: "Beyond decoration, what fundamental role do graphic elements play in design?",
+      options: ["They only fill empty space", "They communicate meaning and enhance the message", "They distract from important content", "They are just trendy additions"],
+      correctAnswer: "They communicate meaning and enhance the message"
+    }
+  ];
+  
+  let currentQuestionIndex = 0;
+  let quizScore = 0;
+  let answeredQuestions = 0;
+  
+  function initGraphicElementsQuiz() {
+    // Shuffle the questions
+    shuffleArray(quizQuestions);
+    
+    // Display the first question
+    displayQuestion(currentQuestionIndex);
+    
+    // Set up event listener for next question button
+    document.getElementById('nextQuestion').addEventListener('click', function() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizQuestions.length) {
+        displayQuestion(currentQuestionIndex);
+      } else {
+        finishQuiz();
+      }
+    });
+  }
+  
+  function displayQuestion(index) {
+    const question = quizQuestions[index];
+    document.getElementById('currentQuestion').innerHTML = `<strong>${question.question}</strong>`;
+    
+    // Create option buttons
+    const optionsContainer = document.getElementById('answerOptions');
+    optionsContainer.innerHTML = '';
+    
+    // Shuffle the options
+    const shuffledOptions = [...question.options];
+    shuffleArray(shuffledOptions);
+    
+    shuffledOptions.forEach(option => {
+      const button = document.createElement('button');
+      button.className = 'shortcut-option';
+      button.textContent = option;
+      button.onclick = function() { 
+        checkQuizAnswer(this.textContent, question.correctAnswer);
+      };
+      optionsContainer.appendChild(button);
+    });
+    
+    // Reset feedback and hide next button
+    document.getElementById('gameFeedback').textContent = '';
+    document.getElementById('gameFeedback').className = 'shortcut-feedback';
+    document.getElementById('nextQuestion').style.display = 'none';
+  }
+  
+  function checkQuizAnswer(selectedAnswer, correctAnswer) {
+    // Increment answered questions
+    answeredQuestions++;
+    
+    const isCorrect = selectedAnswer === correctAnswer;
+    const feedbackElement = document.getElementById('gameFeedback');
+    
+    // Disable all options
+    const options = document.querySelectorAll('.shortcut-option');
+    options.forEach(option => {
+      option.disabled = true;
+      
+      if (option.textContent === correctAnswer) {
+        option.classList.add('correct');
+      } else if (option.textContent === selectedAnswer && selectedAnswer !== correctAnswer) {
+        option.classList.add('incorrect');
+      }
+    });
+    
+    // Update feedback
+    if (isCorrect) {
+      feedbackElement.textContent = '✓ Correct!';
+      feedbackElement.className = 'shortcut-feedback correct';
+      quizScore++;
+    } else {
+      feedbackElement.textContent = `✗ Incorrect. The correct answer is "${correctAnswer}"`;
+      feedbackElement.className = 'shortcut-feedback incorrect';
+    }
+    
+    // Update score and show next button
+    document.getElementById('gameScore').textContent = `Score: ${quizScore} / ${answeredQuestions}`;
+    document.getElementById('nextQuestion').style.display = 'block';
+  }
+  
+  function finishQuiz() {
+    const gameContainer = document.getElementById('graphicElementsGame');
+    const percentage = Math.round((quizScore / quizQuestions.length) * 100);
+    
+    let feedbackMessage = '';
+    if (percentage >= 90) {
+      feedbackMessage = '🎉 Excellent! You\'ve mastered these graphic element techniques!';
+    } else if (percentage >= 70) {
+      feedbackMessage = '👍 Great job! You understand most of the concepts.';
+    } else if (percentage >= 50) {
+      feedbackMessage = '👌 Good effort! A little more practice will help reinforce these techniques.';
+    } else {
+      feedbackMessage = '💪 Keep learning! Review the tutorial again to strengthen your understanding.';
+    }
+    
+    gameContainer.innerHTML = `
+      <h3>Quiz Complete!</h3>
+      <div class="shortcut-score">Final Score: ${quizScore} / ${quizQuestions.length} (${percentage}%)</div>
+      <p>${feedbackMessage}</p>
+      <button class="btn btn-primary" id="restartQuiz">Play Again</button>
+    `;
+    
+    document.getElementById('restartQuiz').addEventListener('click', resetQuiz);
+  }
+  
+  function resetQuiz() {
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    answeredQuestions = 0;
+    
+    // Reset game container
+    const gameContainer = document.getElementById('graphicElementsGame');
+    gameContainer.innerHTML = `
+      <h3>🎮 Quick Quiz</h3>
+      
+      <div class="shortcut-question">
+        <div id="currentQuestion">Loading question...</div>
+      </div>
+      
+      <div class="shortcut-options" id="answerOptions">
+        <!-- Options will be filled by JavaScript -->
+      </div>
+      
+      <div class="shortcut-feedback" id="gameFeedback"></div>
+      <div class="shortcut-score" id="gameScore">Score: 0 / 0</div>
+      
+      <button class="btn btn-primary" id="nextQuestion" style="display: none;">Next Question</button>
+    `;
+    
+    // Shuffle questions and start again
+    shuffleArray(quizQuestions);
+    displayQuestion(0);
+    
+    // Set up event listener for next question button
+    document.getElementById('nextQuestion').addEventListener('click', function() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizQuestions.length) {
+        displayQuestion(currentQuestionIndex);
+      } else {
+        finishQuiz();
+      }
+    });
+  }
+  
+  // Helper function to shuffle arrays
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
+  // Initialize everything when the page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    setupTabs();
+    setupMarkMakingCanvas();
+    setupSymbolGallery();
+    initGraphicElementsQuiz();
+  });
+</script>
+</body>
+</html>
