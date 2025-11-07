@@ -35,7 +35,7 @@
     line-height: 1.6;
   }
   
-  .container {
+  .page-container {
     max-width: 1100px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.97);
@@ -44,6 +44,7 @@
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
     padding: 3rem 4rem;
     animation: fadeIn 1s ease;
+    box-sizing: border-box;
   }
   
   @keyframes fadeIn {
@@ -52,7 +53,7 @@
   }
   
   @media (max-width: 768px) {
-    .container {
+    .page-container {
       padding: 2rem 1.5rem;
     }
   }
@@ -69,6 +70,7 @@
     border-bottom: 3px dotted var(--secondary);
     padding-bottom: 12px;
     margin-bottom: 1.5rem;
+    text-align: center;
   }
   
   h2 {
@@ -1191,38 +1193,31 @@
   .demo-image {
     cursor: pointer;
   }
-  .page-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
+  
+  .learning-objectives {
+    border: 1px solid var(--primary);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-.learning-objectives {
-  border: 1px solid #e066ff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 30px;
-  width: 100%;
-  box-sizing: border-box;
-}
+  .session-goals {
+    margin-top: 20px;
+  }
 
-.main-content {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.main-content h1 {
-  color: #e066ff;
-  text-align: center;
-  margin-bottom: 20px;
-}
+  .session-goals p {
+    margin-bottom: 8px;
+  }
 </style>
 </head>
 <body>
 
 <div class="page-container">
   <!-- LEARNING OBJECTIVES -->
+  <h1>Creating Graphic Elements for Dynamic Page Design</h1>
+  
   <div class="learning-objectives">
     <h3>Today's Learning Journey (2.5 hours)</h3>
     
@@ -1252,15 +1247,10 @@
     </div>
   </div>
   
-  <div class="main-content">
-    <h1>Creating Graphic Elements for Dynamic Page Design</h1>
-    
-    <div class="visual-guide">
-      <div class="number">!</div>
-      <p>Learn how to create unique graphic elements</p>
-    </div>
+  <div class="visual-guide">
+    <div class="number">!</div>
+    <p>Learn how to create unique graphic elements</p>
   </div>
-</div>
   
   <!-- MODULE 1: WHY GRAPHIC ELEMENTS MATTER -->
   <div class="module">
@@ -1518,13 +1508,15 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
   
   <!-- MODULE 4: KEYBOARD MARK-MAKING -->
   <div class="module">
     <div class="module-header">
       <h2 class="module-title">Technique 2: Keyboard Mark-Making</h2>
     </div>
-      
+    <div class="module-content">
       <!-- Artist Example with David Carson -->
       <div class="artist-example">
         <div class="artist-header">
@@ -1543,7 +1535,6 @@
           </div>
         </div>
       </div>
-    </div>
       
       <!-- Meaning section for Keyboard Mark-Making -->
       <div class="meaning-box">
@@ -1614,6 +1605,8 @@
           <p>Transform with <span class="keyboard-shortcut">Ctrl/Cmd+T</span></p>
         </div>
       </div>
+    </div>
+  </div>
   
   <!-- MODULE 5: SYMBOL BRUSHES -->
   <div class="module">
@@ -1658,6 +1651,8 @@
           <p>Apply to paths with Brush Tool</p>
         </div>
       </div>
+    </div>
+  </div>
   
   <!-- MODULE 6: HAND-DRAWING EXTENSION (OPTIONAL) -->
   <div class="module">
