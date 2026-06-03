@@ -55,7 +55,6 @@ body::before {
   z-index: 1;
 }
 
-/* HEADER */
 .site-header {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -65,7 +64,6 @@ body::before {
   padding-bottom: 20px;
   margin-bottom: 10px;
 }
-
 .header-eyebrow {
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
@@ -74,16 +72,13 @@ body::before {
   color: var(--teal);
   margin-bottom: 8px;
 }
-
 .site-header h1 {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 400;
   line-height: 1.1;
 }
-
 .site-header h1 em { color: var(--teal); font-style: italic; }
-
 .header-meta {
   font-family: 'Space Mono', monospace;
   font-size: 0.72rem;
@@ -92,38 +87,12 @@ body::before {
   line-height: 1.8;
 }
 
-/* PROGRESS */
-.progress-wrap {
-  height: 6px;
-  background: var(--warm-mid);
-  margin-bottom: 20px;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--pink), var(--teal));
-  transition: width 0.4s ease;
-}
+.progress-wrap { height: 6px; background: var(--warm-mid); margin-bottom: 20px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--pink), var(--teal)); transition: width 0.4s ease; }
 
-/* NAV */
-.nav-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 30px;
-}
+.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 30px; }
 @media (max-width: 700px) { .nav-grid { grid-template-columns: repeat(3, 1fr); } }
-
-.nav-block {
-  border: 2px solid var(--warm-mid);
-  background: white;
-  padding: 14px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  border-radius: 3px;
-}
+.nav-block { border: 2px solid var(--warm-mid); background: white; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; font-family: 'Space Mono', monospace; font-size: 0.72rem; border-radius: 3px; }
 .nav-block:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 .nav-block.active { background: var(--ink); color: white; border-color: var(--ink); }
 .nav-block .nav-icon { font-size: 1.3rem; display: block; margin-bottom: 5px; }
@@ -131,466 +100,121 @@ body::before {
 .nav-block .nav-sub { color: var(--concrete); font-size: 0.65rem; margin-top: 2px; display: block; }
 .nav-block.active .nav-sub { color: var(--warm-mid); }
 
-/* SECTIONS */
 .section { display: none; }
 .section.active { display: block; animation: fadeUp 0.4s ease; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* TYPOGRAPHY */
-h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.7rem;
-  font-weight: 400;
-  margin: 2rem 0 1rem;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-h2::before {
-  content: '';
-  display: inline-block;
-  width: 6px; height: 28px;
-  background: var(--pink);
-  flex-shrink: 0;
-}
-
-h3 {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.88rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--teal);
-  margin: 1.4rem 0 0.7rem;
-}
-
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; font-weight: 400; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 12px; }
+h2::before { content: ''; display: inline-block; width: 6px; height: 28px; background: var(--pink); flex-shrink: 0; }
+h3 { font-family: 'Space Mono', monospace; font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin: 1.4rem 0 0.7rem; }
 p { margin-bottom: 1em; font-size: 0.92rem; line-height: 1.8; }
 a { color: var(--teal); font-weight: 600; }
 a:hover { color: var(--pink); }
 ul { margin-left: 20px; margin-bottom: 1em; }
 li { font-size: 0.9rem; margin-bottom: 6px; }
 
-.diagonal-rule {
-  height: 3px;
-  background: linear-gradient(90deg, var(--pink), var(--teal));
-  margin: 28px 0;
-  transform: skewX(-15deg);
-}
+.diagonal-rule { height: 3px; background: linear-gradient(90deg, var(--pink), var(--teal)); margin: 28px 0; transform: skewX(-15deg); }
 
-/* BANNERS */
-.section-banner {
-  padding: 14px 20px;
-  margin-bottom: 25px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-left: 6px solid currentColor;
-  border-radius: 0 4px 4px 0;
-}
+.section-banner { padding: 14px 20px; margin-bottom: 25px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-left: 6px solid currentColor; border-radius: 0 4px 4px 0; }
 .banner-overview { background: var(--teal-light); color: var(--teal); }
 .banner-t1 { background: var(--pink-light); color: var(--pink); }
 .banner-t2 { background: #f0ebf8; color: #7b4fa3; }
 .banner-t3 { background: #eaf3fb; color: #2a7aab; }
 .banner-portfolio { background: var(--gold-light); color: var(--gold); }
 
-/* VIDEO */
-.video-wrap {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border: 2px solid var(--ink);
-  border-radius: 4px;
-  margin: 20px 0;
-}
-.video-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-}
+.video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 4px; margin: 20px 0; }
+.video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-/* WORKFLOW */
-.workflow {
-  border: 2px solid var(--ink);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 20px 0;
-}
-.workflow-head {
-  background: var(--ink);
-  color: white;
-  padding: 10px 18px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+.workflow { border: 2px solid var(--ink); border-radius: 4px; overflow: hidden; margin: 20px 0; }
+.workflow-head { background: var(--ink); color: white; padding: 10px 18px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .workflow-body { background: white; padding: 14px 18px; }
-
-.step-block {
-  display: flex;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--grid);
-  align-items: flex-start;
-}
+.step-block { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--grid); align-items: flex-start; }
 .step-block:last-child { border-bottom: none; }
+.step-num { width: 34px; height: 34px; background: var(--pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.88rem; flex-shrink: 0; margin-top: 2px; }
+.step-title { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
 
-.step-num {
-  width: 34px; height: 34px;
-  background: var(--pink);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
-  font-size: 0.88rem;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.step-title {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--pink);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
-}
-
-/* BOXES */
-.info-box {
-  border: 2px solid var(--teal);
-  border-radius: 4px;
-  padding: 14px 18px;
-  margin: 16px 0;
-  background: var(--teal-light);
-  font-size: 0.88rem;
-}
+.info-box { border: 2px solid var(--teal); border-radius: 4px; padding: 14px 18px; margin: 16px 0; background: var(--teal-light); font-size: 0.88rem; }
 .info-box strong { color: var(--teal); }
-
-.notice {
-  background: rgba(234,55,163,0.08);
-  border-left: 5px solid var(--pink);
-  padding: 12px 16px;
-  margin: 14px 0;
-  border-radius: 0 4px 4px 0;
-  font-size: 0.86rem;
-}
+.notice { background: rgba(234,55,163,0.08); border-left: 5px solid var(--pink); padding: 12px 16px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 0.86rem; }
 .notice strong { color: var(--pink); }
-
-.tip-box {
-  background: #fffbea;
-  border: 2px solid #e6c200;
-  border-radius: 4px;
-  padding: 14px 18px;
-  margin: 14px 0;
-  font-size: 0.86rem;
-}
+.tip-box { background: #fffbea; border: 2px solid #e6c200; border-radius: 4px; padding: 14px 18px; margin: 14px 0; font-size: 0.86rem; }
 .tip-box h4 { color: #a08800; font-family: 'Space Mono', monospace; font-size: 0.72rem; text-transform: uppercase; margin-bottom: 8px; }
 
-/* ARTIST PANEL */
-.artist-panel {
-  background: var(--ink);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 20px 0;
-}
-.artist-panel-header {
-  padding: 10px 18px;
-  background: rgba(255,255,255,0.08);
-  font-family: 'Space Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--blue-accent);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.artist-panel-body {
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+.artist-panel { background: var(--ink); border-radius: 4px; overflow: hidden; margin: 20px 0; }
+.artist-panel-header { padding: 10px 18px; background: rgba(255,255,255,0.08); font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.artist-panel-body { padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 600px) { .artist-panel-body { grid-template-columns: 1fr; } }
-
-.img-slot {
-  border-radius: 3px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-}
-.img-slot img {
-  width: 100%; height: 240px;
-  object-fit: cover;
-  display: block;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
+.img-slot { border-radius: 3px; overflow: hidden; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+.img-slot img { width: 100%; height: 240px; object-fit: cover; display: block; cursor: pointer; transition: opacity 0.2s; }
 .img-slot img:hover { opacity: 0.9; }
-.img-slot-placeholder {
-  width: 100%; height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.2);
-  font-size: 0.75rem;
-  font-style: italic;
-  text-align: center;
-  padding: 20px;
-}
-.img-caption {
-  padding: 7px 12px;
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.5);
-  font-style: italic;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
+.img-slot-placeholder { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 0.75rem; font-style: italic; text-align: center; padding: 20px; }
+.img-caption { padding: 7px 12px; font-size: 0.7rem; color: rgba(255,255,255,0.5); font-style: italic; border-top: 1px solid rgba(255,255,255,0.08); }
 .annotation-list { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
-.annotation {
-  padding: 10px 12px;
-  border-left: 3px solid var(--blue-accent);
-  background: rgba(255,255,255,0.05);
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.85);
-}
-.annotation strong {
-  color: var(--blue-accent);
-  display: block;
-  font-size: 0.67rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 3px;
-}
+.annotation { padding: 10px 12px; border-left: 3px solid var(--blue-accent); background: rgba(255,255,255,0.05); font-size: 0.8rem; line-height: 1.6; color: rgba(255,255,255,0.85); }
+.annotation strong { color: var(--blue-accent); display: block; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
 
-/* TECHNIQUE GRID */
-.technique-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
-  margin: 20px 0;
-}
-.technique-card {
-  background: white;
-  border: 2px solid var(--warm-mid);
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.2s;
-}
+.technique-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 20px 0; }
+.technique-card { background: white; border: 2px solid var(--warm-mid); border-radius: 4px; overflow: hidden; transition: all 0.2s; }
 .technique-card:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-.technique-top {
-  background: var(--ink);
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-}
+.technique-top { background: var(--ink); height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
 .technique-body { padding: 12px; }
 .technique-body h4 { font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--teal); margin-bottom: 5px; text-transform: uppercase; }
 .technique-body p { font-size: 0.8rem; margin: 0; line-height: 1.5; }
 
-/* PATH PREVIEW SVG */
-.path-preview {
-  border: 2px solid var(--warm-mid);
-  border-radius: 4px;
-  padding: 16px;
-  margin: 18px 0;
-  background: white;
-  text-align: center;
-}
+.path-preview { border: 2px solid var(--warm-mid); border-radius: 4px; padding: 16px; margin: 18px 0; background: white; text-align: center; }
 
-/* KEYBOARD CANVAS */
-.canvas-wrap {
-  border: 2px solid var(--ink);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 16px 0;
-}
-#markMakingCanvas {
-  background: white;
-  cursor: crosshair;
-  touch-action: none;
-  width: 100%;
-  display: block;
-}
-.canvas-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px;
-  background: var(--teal-light);
-  border-top: 2px solid var(--ink);
-  align-items: center;
-}
-
-.btn {
-  padding: 8px 16px;
-  border: 2px solid var(--ink);
-  border-radius: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: white;
-  color: var(--ink);
-}
+.canvas-wrap { border: 2px solid var(--ink); border-radius: 4px; overflow: hidden; margin: 16px 0; }
+#markMakingCanvas { background: white; cursor: crosshair; touch-action: none; width: 100%; display: block; }
+.canvas-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background: var(--teal-light); border-top: 2px solid var(--ink); align-items: center; }
+.btn { padding: 8px 16px; border: 2px solid var(--ink); border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; background: white; color: var(--ink); }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-.btn-ink { background: var(--ink); color: white; }
-.btn-pink { background: var(--pink); color: white; border-color: var(--pink); }
 .btn-teal { background: var(--teal); color: white; border-color: var(--teal); }
-
 .color-picker { display: flex; gap: 6px; align-items: center; }
-.color-dot {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+.color-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s; }
 .color-dot:hover { transform: scale(1.15); }
 .color-dot.selected { border: 3px solid var(--ink); transform: scale(1.15); }
+select { padding: 6px 10px; border: 2px solid var(--ink); border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 0.72rem; background: white; cursor: pointer; }
 
-select {
-  padding: 6px 10px;
-  border: 2px solid var(--ink);
-  border-radius: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  background: white;
-  cursor: pointer;
-}
-
-/* QUIZ */
-.quiz-wrap {
-  background: var(--teal-light);
-  border: 2px solid var(--teal);
-  border-radius: 4px;
-  padding: 22px;
-  margin: 20px 0;
-  text-align: center;
-}
-.quiz-question { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; margin-bottom: 18px; color: var(--ink); }
-.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-@media (max-width: 500px) { .quiz-options { grid-template-columns: 1fr; } }
-.quiz-option {
-  background: white;
-  border: 2px solid var(--teal);
-  border-radius: 3px;
-  padding: 10px 12px;
-  cursor: pointer;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  transition: all 0.2s;
-  text-align: left;
-}
-.quiz-option:hover:not([disabled]) { background: var(--teal-light); transform: translateY(-2px); }
-.quiz-option.correct { background: #d4f7d4; border-color: #5cb85c; }
-.quiz-option.incorrect { background: #f7d4d4; border-color: #d9534f; }
-.quiz-feedback { min-height: 1.6rem; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; margin: 10px 0; }
-.quiz-feedback.correct { color: #2e7d32; }
-.quiz-feedback.incorrect { color: #c62828; }
-.quiz-score { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--teal); font-weight: 700; margin-bottom: 10px; }
-
-/* CHECKLIST */
-.checklist {
-  background: white;
-  border: 2px solid var(--teal);
-  border-radius: 4px;
-  padding: 22px;
-  margin: 25px 0;
-}
-.checklist h3 {
-  color: var(--teal);
-  text-align: center;
-  border-bottom: 2px dashed var(--teal);
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  font-size: 0.8rem;
-}
+.checklist { background: white; border: 2px solid var(--teal); border-radius: 4px; padding: 22px; margin: 25px 0; }
+.checklist h3 { color: var(--teal); text-align: center; border-bottom: 2px dashed var(--teal); padding-bottom: 12px; margin-bottom: 16px; font-size: 0.8rem; }
 .check-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
-.check-box {
-  width: 22px; height: 22px;
-  border: 2px solid var(--teal);
-  border-radius: 3px;
-  flex-shrink: 0;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.2s;
-  margin-top: 2px;
-}
+.check-box { width: 22px; height: 22px; border: 2px solid var(--teal); border-radius: 3px; flex-shrink: 0; cursor: pointer; position: relative; transition: background 0.2s; margin-top: 2px; }
 .check-box:hover { background: var(--teal-light); }
 .check-box.checked { background: var(--teal); }
 .check-box.checked::after { content: '✓'; position: absolute; color: white; font-size: 13px; font-weight: 700; top: 0px; left: 3px; }
 .check-label { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--teal); display: block; }
 .check-desc { font-size: 0.78rem; color: var(--concrete); margin-top: 2px; }
 
-/* PORTFOLIO UPLOAD */
-.portfolio-upload {
-  background: white;
-  border: 3px dashed var(--gold);
-  border-radius: 4px;
-  padding: 28px;
-  margin: 25px 0;
-  text-align: center;
-}
-.portfolio-upload h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 12px;
-}
-.portfolio-upload p { font-size: 0.88rem; color: var(--concrete); margin-bottom: 20px; }
-
-.upload-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin: 16px 0 22px;
-}
-.upload-item {
-  background: var(--gold-light);
-  border: 1px solid var(--gold);
-  border-radius: 3px;
-  padding: 10px 16px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.upload-form {
+/* PROGRESS REPORT FORM */
+.report-form {
   background: var(--gold-light);
   border: 2px solid var(--gold);
   border-radius: 4px;
-  padding: 20px;
+  padding: 22px;
   margin: 20px 0;
-  text-align: left;
 }
-.upload-form h4 { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
-
+.report-form h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
 .form-group { margin-bottom: 14px; }
-.form-group label { font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-group label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 .form-group input[type="text"],
-.form-group textarea,
-.form-group select {
+.form-group textarea {
   width: 100%;
   padding: 10px 12px;
   border: 2px solid var(--warm-mid);
@@ -603,26 +227,11 @@ select {
 .form-group input[type="text"]:focus,
 .form-group textarea:focus { border-color: var(--teal); outline: none; }
 .form-group textarea { resize: vertical; min-height: 80px; }
-
-.form-group input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  border: 2px dashed var(--warm-mid);
-  border-radius: 3px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.82rem;
-  background: white;
-  cursor: pointer;
-}
-.form-group input[type="file"]:hover { border-color: var(--teal); }
-
 .submit-btn {
-  display: inline-block;
   background: var(--ink);
   color: white;
   padding: 14px 32px;
   border-radius: 3px;
-  text-decoration: none;
   font-family: 'Space Mono', monospace;
   font-size: 0.8rem;
   font-weight: 700;
@@ -635,94 +244,35 @@ select {
 }
 .submit-btn:hover { background: var(--teal); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
-.padlet-btn {
-  display: inline-block;
-  background: var(--teal);
-  color: white;
-  padding: 14px 32px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: all 0.2s;
-}
+.portfolio-upload { background: white; border: 3px dashed var(--gold); border-radius: 4px; padding: 28px; margin: 25px 0; text-align: center; }
+.portfolio-upload h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 12px; }
+.portfolio-upload p { font-size: 0.88rem; color: var(--concrete); margin-bottom: 20px; }
+.upload-items { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px 0 22px; }
+.upload-item { background: var(--gold-light); border: 1px solid var(--gold); border-radius: 3px; padding: 10px 16px; font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--gold); }
+.padlet-btn { display: inline-block; background: var(--teal); color: white; padding: 14px 32px; border-radius: 3px; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; }
 .padlet-btn:hover { background: var(--ink); color: white; transform: translateY(-2px); }
 
-/* NAV BUTTONS */
-.nav-btns {
-  display: flex;
-  justify-content: space-between;
-  margin: 35px 0 10px;
-  gap: 12px;
-}
+.nav-btns { display: flex; justify-content: space-between; margin: 35px 0 10px; gap: 12px; }
 .btn-prev { background: white; color: var(--ink); }
 .btn-next { background: var(--ink); color: white; border-color: var(--ink); }
-.btn-nav {
-  padding: 12px 22px;
-  border: 2px solid var(--ink);
-  border-radius: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+.btn-nav { padding: 12px 22px; border: 2px solid var(--ink); border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; }
 .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
 .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background: rgba(0,0,0,0.92);
-}
-.modal-img {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  max-width: 92vw; max-height: 90vh;
-  border: 3px solid white;
-  border-radius: 3px;
-}
-.modal-close {
-  position: absolute;
-  top: 18px; right: 28px;
-  color: white; font-size: 2.5rem;
-  cursor: pointer;
-  font-family: 'Space Mono', monospace;
-  line-height: 1;
-}
+.modal { display: none; position: fixed; z-index: 1000; inset: 0; background: rgba(0,0,0,0.92); }
+.modal-img { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); max-width: 92vw; max-height: 90vh; border: 3px solid white; border-radius: 3px; }
+.modal-close { position: absolute; top: 18px; right: 28px; color: white; font-size: 2.5rem; cursor: pointer; font-family: 'Space Mono', monospace; line-height: 1; }
 .modal-close:hover { color: var(--pink); }
 
-footer {
-  text-align: center;
-  padding: 20px 0 10px;
-  border-top: 1px dashed var(--warm-mid);
-  margin-top: 40px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--concrete);
-}
+footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--warm-mid); margin-top: 40px; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--concrete); }
 
-@media (max-width: 600px) {
-  .container { padding: 24px 16px 40px; }
-  .site-header { grid-template-columns: 1fr; }
-  .header-meta { text-align: left; }
-}
+@media (max-width: 600px) { .container { padding: 24px 16px 40px; } .site-header { grid-template-columns: 1fr; } .header-meta { text-align: left; } }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- HEADER -->
   <header class="site-header">
     <div>
       <div class="header-eyebrow">Digital Skills · Rotation Session</div>
@@ -737,75 +287,28 @@ footer {
     <div class="progress-fill" id="progressBar" style="width:20%"></div>
   </div>
 
-  <!-- NAV -->
   <div class="nav-grid">
-    <div class="nav-block active" data-sec="overview">
-      <span class="nav-icon">👁</span>
-      <span class="nav-label">Overview</span>
-      <span class="nav-sub">The idea</span>
-    </div>
-    <div class="nav-block" data-sec="task1">
-      <span class="nav-icon">〰</span>
-      <span class="nav-label">Task 1</span>
-      <span class="nav-sub">Type on path</span>
-    </div>
-    <div class="nav-block" data-sec="task2">
-      <span class="nav-icon">⌨</span>
-      <span class="nav-label">Task 2</span>
-      <span class="nav-sub">Keyboard marks</span>
-    </div>
-    <div class="nav-block" data-sec="task3">
-      <span class="nav-icon">✦</span>
-      <span class="nav-label">Task 3</span>
-      <span class="nav-sub">Symbol brushes</span>
-    </div>
-    <div class="nav-block" data-sec="portfolio">
-      <span class="nav-icon">📋</span>
-      <span class="nav-label">Portfolio</span>
-      <span class="nav-sub">Review & submit</span>
-    </div>
+    <div class="nav-block active" data-sec="overview"><span class="nav-icon">👁</span><span class="nav-label">Overview</span><span class="nav-sub">The idea</span></div>
+    <div class="nav-block" data-sec="task1"><span class="nav-icon">〰</span><span class="nav-label">Task 1</span><span class="nav-sub">Type on path</span></div>
+    <div class="nav-block" data-sec="task2"><span class="nav-icon">⌨</span><span class="nav-label">Task 2</span><span class="nav-sub">Keyboard marks</span></div>
+    <div class="nav-block" data-sec="task3"><span class="nav-icon">✦</span><span class="nav-label">Task 3</span><span class="nav-sub">Symbol brushes</span></div>
+    <div class="nav-block" data-sec="portfolio"><span class="nav-icon">📋</span><span class="nav-label">Portfolio</span><span class="nav-sub">Review & submit</span></div>
   </div>
 
   <!-- ═══ OVERVIEW ═══ -->
   <div id="overview" class="section active">
-
     <div class="section-banner banner-overview">Session Overview</div>
-
     <p>In this session you will learn three techniques for creating graphic elements in Photoshop. These marks do real work on the page — connecting images, guiding the reader's eye, and giving your design a visual voice.</p>
-
     <div class="diagonal-rule"></div>
-
     <h2>Three Techniques</h2>
-
     <div class="technique-grid">
-      <div class="technique-card">
-        <div class="technique-top">〰</div>
-        <div class="technique-body">
-          <h4>Task 1 — Type on Path</h4>
-          <p>Place repeated characters along a curved or straight path. The shape becomes part of the meaning.</p>
-        </div>
-      </div>
-      <div class="technique-card">
-        <div class="technique-top">⌨</div>
-        <div class="technique-body">
-          <h4>Task 2 — Keyboard Marks</h4>
-          <p>Use repeated keyboard characters as visual texture. Slashes, tildes, asterisks — each carries its own energy.</p>
-        </div>
-      </div>
-      <div class="technique-card">
-        <div class="technique-top">✦</div>
-        <div class="technique-body">
-          <h4>Task 3 — Symbol Brushes</h4>
-          <p>Turn any character into a brush and paint it along a path. Repeating symbols create rhythm and pattern.</p>
-        </div>
-      </div>
+      <div class="technique-card"><div class="technique-top">〰</div><div class="technique-body"><h4>Task 1 — Type on Path</h4><p>Place repeated characters along a curved or straight path. The shape becomes part of the meaning.</p></div></div>
+      <div class="technique-card"><div class="technique-top">⌨</div><div class="technique-body"><h4>Task 2 — Keyboard Marks</h4><p>Use repeated keyboard characters as visual texture. Slashes, tildes, asterisks — each carries its own energy.</p></div></div>
+      <div class="technique-card"><div class="technique-top">✦</div><div class="technique-body"><h4>Task 3 — Symbol Brushes</h4><p>Turn any character into a brush and paint it along a path. Repeating symbols create rhythm and pattern.</p></div></div>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>What You Are Working Toward</h2>
     <p>Look at how these techniques create pages that have a visual identity — marks that feel like the research theme itself:</p>
-
     <div class="artist-panel">
       <div class="artist-panel-header">Student Example — Micky Zhuo: Design 2025/26 · Memory of the City</div>
       <div class="artist-panel-body">
@@ -821,12 +324,10 @@ footer {
         </div>
       </div>
     </div>
-
     <div class="tip-box">
       <h4>💡 Key question to ask yourself</h4>
       Does this mark feel like my research theme? A mark about decay should feel different from a mark about structure.
     </div>
-
     <div class="nav-btns">
       <button class="btn-nav btn-prev" disabled>← Previous</button>
       <button class="btn-nav btn-next" onclick="goTo('task1')">Task 1: Type on Path →</button>
@@ -835,20 +336,12 @@ footer {
 
   <!-- ═══ TASK 1 ═══ -->
   <div id="task1" class="section">
-
     <div class="section-banner banner-t1">Task 1 — Type on Path</div>
-
     <p>Place repeated characters along a curved path to create marks that feel like movement, flow, or structure. The path shape itself carries meaning.</p>
-
     <h2>Watch First</h2>
-    <div class="video-wrap">
-      <iframe src="https://ual.cloud.panopto.eu/Panopto/Pages/embed.aspx?id=c3174910-e446-41df-b906-b38e00a293cc" frameborder="0" allowfullscreen></iframe>
-    </div>
-
+    <div class="video-wrap"><iframe src="https://ual.cloud.panopto.eu/Panopto/Pages/embed.aspx?id=c3174910-e446-41df-b906-b38e00a293cc" frameborder="0" allowfullscreen></iframe></div>
     <div class="diagonal-rule"></div>
-
     <h2>Artist Reference — Ed Fella</h2>
-
     <div class="artist-panel">
       <div class="artist-panel-header">Ed Fella — Experimental Typography</div>
       <div class="artist-panel-body">
@@ -864,98 +357,34 @@ footer {
         </div>
       </div>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>How to Do It</h2>
-
     <div class="workflow">
       <div class="workflow-head">Type on Path — Step by Step</div>
       <div class="workflow-body">
-        <div class="step-block">
-          <div class="step-num">1</div>
-          <div>
-            <div class="step-title">Create a path</div>
-            <p>Select the <strong>Pen Tool (P)</strong>. Click and drag to make a curved line. You are drawing a path, not a shape.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">2</div>
-          <div>
-            <div class="step-title">Choose your characters</div>
-            <p>Think about what character fits your theme. Try: <strong>~ ~ ~</strong> for flow, <strong>/ / /</strong> for energy, <strong>* * *</strong> for texture.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">3</div>
-          <div>
-            <div class="step-title">Attach type to the path</div>
-            <p>Select the <strong>Type Tool (T)</strong>. Hover over your path — the cursor changes. Click on the path and type your characters.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">4</div>
-          <div>
-            <div class="step-title">Adjust size and spacing</div>
-            <p>Change the font size to make marks larger or smaller. Adjust tracking in the Character panel to space them out.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">5</div>
-          <div>
-            <div class="step-title">Convert to shapes (optional)</div>
-            <p>Go to <strong>Type → Convert to Shape</strong>. This lets you distort and transform the marks further using Free Transform.</p>
-          </div>
-        </div>
+        <div class="step-block"><div class="step-num">1</div><div><div class="step-title">Create a path</div><p>Select the <strong>Pen Tool (P)</strong>. Click and drag to make a curved line. You are drawing a path, not a shape.</p></div></div>
+        <div class="step-block"><div class="step-num">2</div><div><div class="step-title">Choose your characters</div><p>Think about what character fits your theme. Try: <strong>~ ~ ~</strong> for flow, <strong>/ / /</strong> for energy, <strong>* * *</strong> for texture.</p></div></div>
+        <div class="step-block"><div class="step-num">3</div><div><div class="step-title">Attach type to the path</div><p>Select the <strong>Type Tool (T)</strong>. Hover over your path — the cursor changes. Click on the path and type your characters.</p></div></div>
+        <div class="step-block"><div class="step-num">4</div><div><div class="step-title">Adjust size and spacing</div><p>Change the font size to make marks larger or smaller. Adjust tracking in the Character panel to space them out.</p></div></div>
+        <div class="step-block"><div class="step-num">5</div><div><div class="step-title">Convert to shapes (optional)</div><p>Go to <strong>Type → Convert to Shape</strong>. This lets you distort and transform the marks further using Free Transform.</p></div></div>
       </div>
     </div>
-
     <div class="path-preview">
       <svg width="100%" height="120" viewBox="0 0 600 120">
         <path id="curve1" d="M20,80 C100,20 200,20 300,60 C400,100 500,20 580,40" fill="transparent"/>
-        <text font-family="monospace" font-size="14" fill="#0a7a7a">
-          <textPath href="#curve1" startOffset="0%">~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</textPath>
-        </text>
+        <text font-family="monospace" font-size="14" fill="#0a7a7a"><textPath href="#curve1" startOffset="0%">~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</textPath></text>
         <path id="curve2" d="M20,110 C150,50 300,110 450,50 C500,30 560,70 590,90" fill="transparent"/>
-        <text font-family="monospace" font-size="12" fill="#ea37a3">
-          <textPath href="#curve2" startOffset="0%">/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / /</textPath>
-        </text>
+        <text font-family="monospace" font-size="12" fill="#ea37a3"><textPath href="#curve2" startOffset="0%">/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / /</textPath></text>
       </svg>
       <p style="font-size:0.72rem;color:var(--concrete);margin-top:8px;margin-bottom:0;font-style:italic;">Live preview — two characters on different paths</p>
     </div>
-
     <div class="checklist">
       <h3>Task 1 Checklist ✓</h3>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have created a curved path with the Pen Tool</span>
-          <span class="check-desc">Click and drag to make curves, not just straight lines</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have placed type on the path</span>
-          <span class="check-desc">Characters follow the curve of the path</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">My character choice feels like my research theme</span>
-          <span class="check-desc">Not generic — specific to my concept</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have tried at least two different paths</span>
-          <span class="check-desc">A curve and a circle, or two different shapes</span>
-        </div>
-      </div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have created a curved path with the Pen Tool</span><span class="check-desc">Click and drag to make curves, not just straight lines</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have placed type on the path</span><span class="check-desc">Characters follow the curve of the path</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">My character choice feels like my research theme</span><span class="check-desc">Not generic — specific to my concept</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have tried at least two different paths</span><span class="check-desc">A curve and a circle, or two different shapes</span></div></div>
     </div>
-
     <div class="nav-btns">
       <button class="btn-nav btn-prev" onclick="goTo('overview')">← Overview</button>
       <button class="btn-nav btn-next" onclick="goTo('task2')">Task 2: Keyboard Marks →</button>
@@ -964,13 +393,9 @@ footer {
 
   <!-- ═══ TASK 2 ═══ -->
   <div id="task2" class="section">
-
     <div class="section-banner banner-t2">Task 2 — Keyboard Mark-Making</div>
-
     <p>Use repeated keyboard characters as visual texture and marks. Different characters carry different energy — choose ones that feel like your research theme.</p>
-
     <h2>Artist Reference — David Carson</h2>
-
     <div class="artist-panel">
       <div class="artist-panel-header">David Carson — Typographic Disruption · Ray Gun Magazine 1990s</div>
       <div class="artist-panel-body">
@@ -986,7 +411,6 @@ footer {
         </div>
       </div>
     </div>
-
     <div class="info-box">
       <strong>Character guide:</strong>
       <ul style="margin-top:8px;">
@@ -997,25 +421,21 @@ footer {
         <li><strong>| | |</strong> — strong, architectural, rigid</li>
       </ul>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>Try It Here</h2>
     <p>Draw with keyboard characters on the canvas below:</p>
-
     <div style="margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
       <select id="characterSelect">
         <option value="*">* Asterisk</option>
         <option value="~">~ Tilde</option>
         <option value="=">=  Equals</option>
-        <option value="/"">/ Slash</option>
+        <option value="/">/ Slash</option>
         <option value="|">| Bar</option>
         <option value="-">- Dash</option>
         <option value="+">+ Plus</option>
         <option value="o">o Circle</option>
       </select>
     </div>
-
     <div class="canvas-wrap">
       <canvas id="markMakingCanvas" height="360"></canvas>
       <div class="canvas-controls">
@@ -1029,77 +449,24 @@ footer {
         <button class="btn btn-teal" id="saveCanvas">Save Image</button>
       </div>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>Now in Photoshop</h2>
-
     <div class="workflow">
       <div class="workflow-head">Keyboard Marks — In Photoshop</div>
       <div class="workflow-body">
-        <div class="step-block">
-          <div class="step-num">1</div>
-          <div>
-            <div class="step-title">Create a text layer</div>
-            <p>Select <strong>Type Tool (T)</strong>. Choose a monospaced font like Courier New or Space Mono. These give even spacing between characters.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">2</div>
-          <div>
-            <div class="step-title">Type repeated characters</div>
-            <p>Type a long string: <strong>/////// or ~~~~~~~ or * * * * *</strong>. Make the font size large — 48pt or bigger.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">3</div>
-          <div>
-            <div class="step-title">Transform and distort</div>
-            <p>Use <strong>Free Transform (Cmd/Ctrl + T)</strong>. Rotate, skew, or stretch the text. Try holding Shift while dragging a corner.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">4</div>
-          <div>
-            <div class="step-title">Layer and overlap</div>
-            <p>Duplicate the layer, change the colour, rotate slightly differently. Overlapping layers of marks create depth.</p>
-          </div>
-        </div>
+        <div class="step-block"><div class="step-num">1</div><div><div class="step-title">Create a text layer</div><p>Select <strong>Type Tool (T)</strong>. Choose a monospaced font like Courier New or Space Mono.</p></div></div>
+        <div class="step-block"><div class="step-num">2</div><div><div class="step-title">Type repeated characters</div><p>Type a long string: <strong>/////// or ~~~~~~~ or * * * * *</strong>. Font size 48pt or bigger.</p></div></div>
+        <div class="step-block"><div class="step-num">3</div><div><div class="step-title">Transform and distort</div><p>Use <strong>Free Transform (Cmd/Ctrl + T)</strong>. Rotate, skew, or stretch the text.</p></div></div>
+        <div class="step-block"><div class="step-num">4</div><div><div class="step-title">Layer and overlap</div><p>Duplicate the layer, change the colour, rotate slightly differently. Overlapping layers create depth.</p></div></div>
       </div>
     </div>
-
     <div class="checklist">
       <h3>Task 2 Checklist ✓</h3>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have tried at least three different characters</span>
-          <span class="check-desc">See how each one feels different on the page</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have transformed at least one text layer</span>
-          <span class="check-desc">Rotated, skewed, or stretched using Free Transform</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have layered marks on top of each other</span>
-          <span class="check-desc">At least two layers of different marks overlapping</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">My marks feel connected to my research theme</span>
-          <span class="check-desc">Character choice and arrangement express the concept</span>
-        </div>
-      </div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have tried at least three different characters</span><span class="check-desc">See how each one feels different on the page</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have transformed at least one text layer</span><span class="check-desc">Rotated, skewed, or stretched using Free Transform</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have layered marks on top of each other</span><span class="check-desc">At least two layers of different marks overlapping</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">My marks feel connected to my research theme</span><span class="check-desc">Character choice and arrangement express the concept</span></div></div>
     </div>
-
     <div class="nav-btns">
       <button class="btn-nav btn-prev" onclick="goTo('task1')">← Task 1</button>
       <button class="btn-nav btn-next" onclick="goTo('task3')">Task 3: Symbol Brushes →</button>
@@ -1108,98 +475,33 @@ footer {
 
   <!-- ═══ TASK 3 ═══ -->
   <div id="task3" class="section">
-
     <div class="section-banner banner-t3">Task 3 — Symbol Brushes</div>
-
     <p>Turn any character into a custom brush and paint it along a path. Repeating symbols create rhythm, pattern, and visual texture.</p>
-
     <h2>Watch First</h2>
-    <div class="video-wrap">
-      <iframe src="https://ual.cloud.panopto.eu/Panopto/Pages/embed.aspx?id=d52ec978-cd82-4f87-8be2-b38e00f76302" frameborder="0" allowfullscreen></iframe>
-    </div>
-
+    <div class="video-wrap"><iframe src="https://ual.cloud.panopto.eu/Panopto/Pages/embed.aspx?id=d52ec978-cd82-4f87-8be2-b38e00f76302" frameborder="0" allowfullscreen></iframe></div>
     <div class="diagonal-rule"></div>
-
     <h2>How to Do It</h2>
-
     <div class="workflow">
       <div class="workflow-head">Symbol Brushes — Step by Step</div>
       <div class="workflow-body">
-        <div class="step-block">
-          <div class="step-num">1</div>
-          <div>
-            <div class="step-title">Create your symbol</div>
-            <p>Use the <strong>Type Tool (T)</strong> to type a single character. Make it large — 60pt or bigger. This becomes your brush shape.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">2</div>
-          <div>
-            <div class="step-title">Define as a brush</div>
-            <p>Go to <strong>Edit → Define Brush Preset</strong>. Give it a name. Your character is now a brush you can paint with.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">3</div>
-          <div>
-            <div class="step-title">Set brush spacing</div>
-            <p>Open the <strong>Brush Settings panel (F5)</strong>. Increase <strong>Spacing</strong> to 100–200% so each symbol is separate and readable.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">4</div>
-          <div>
-            <div class="step-title">Stroke a path</div>
-            <p>Draw a path with the <strong>Pen Tool</strong>. Right-click the path → <strong>Stroke Path</strong> → select your brush. The symbol follows the path exactly.</p>
-          </div>
-        </div>
-        <div class="step-block">
-          <div class="step-num">5</div>
-          <div>
-            <div class="step-title">Vary scale and opacity</div>
-            <p>In Brush Settings, enable <strong>Shape Dynamics</strong> and increase <strong>Size Jitter</strong>. This varies the symbol size as it paints — creating depth.</p>
-          </div>
-        </div>
+        <div class="step-block"><div class="step-num">1</div><div><div class="step-title">Create your symbol</div><p>Use the <strong>Type Tool (T)</strong> to type a single character. Make it large — 60pt or bigger. This becomes your brush shape.</p></div></div>
+        <div class="step-block"><div class="step-num">2</div><div><div class="step-title">Define as a brush</div><p>Go to <strong>Edit → Define Brush Preset</strong>. Give it a name. Your character is now a brush you can paint with.</p></div></div>
+        <div class="step-block"><div class="step-num">3</div><div><div class="step-title">Set brush spacing</div><p>Open the <strong>Brush Settings panel (F5)</strong>. Increase <strong>Spacing</strong> to 100–200% so each symbol is separate and readable.</p></div></div>
+        <div class="step-block"><div class="step-num">4</div><div><div class="step-title">Stroke a path</div><p>Draw a path with the <strong>Pen Tool</strong>. Right-click the path → <strong>Stroke Path</strong> → select your brush.</p></div></div>
+        <div class="step-block"><div class="step-num">5</div><div><div class="step-title">Vary scale and opacity</div><p>In Brush Settings, enable <strong>Shape Dynamics</strong> and increase <strong>Size Jitter</strong> to vary symbol size as it paints.</p></div></div>
       </div>
     </div>
-
     <div class="tip-box">
       <h4>💡 Good symbols to try as brushes</h4>
       <p style="margin:0;">★ ✦ → ◆ ✕ ○ ▲ — each creates a very different visual rhythm. Choose one that responds to your research theme.</p>
     </div>
-
     <div class="checklist">
       <h3>Task 3 Checklist ✓</h3>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have defined at least one character as a brush preset</span>
-          <span class="check-desc">Edit → Define Brush Preset</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have adjusted brush spacing so symbols are separate</span>
-          <span class="check-desc">Brush Settings panel → Spacing 100–200%</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have stroked a path with my symbol brush</span>
-          <span class="check-desc">Right-click path → Stroke Path</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">I have combined all three techniques on one page</span>
-          <span class="check-desc">Type on path, keyboard marks, and symbol brush visible together</span>
-        </div>
-      </div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have defined at least one character as a brush preset</span><span class="check-desc">Edit → Define Brush Preset</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have adjusted brush spacing so symbols are separate</span><span class="check-desc">Brush Settings panel → Spacing 100–200%</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have stroked a path with my symbol brush</span><span class="check-desc">Right-click path → Stroke Path</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have combined all three techniques on one page</span><span class="check-desc">Type on path, keyboard marks, and symbol brush visible together</span></div></div>
     </div>
-
     <div class="nav-btns">
       <button class="btn-nav btn-prev" onclick="goTo('task2')">← Task 2</button>
       <button class="btn-nav btn-next" onclick="goTo('portfolio')">Portfolio Review →</button>
@@ -1211,110 +513,31 @@ footer {
 
     <div class="section-banner banner-portfolio">Portfolio Review & Submission</div>
 
-    <p>Use this checklist to review your work before submitting. Then upload your outcome to the class Padlet.</p>
+    <p>Review your work using the checklist, complete your progress report, then upload to Padlet.</p>
 
     <div class="diagonal-rule"></div>
 
-    <h2>Portfolio Review Checklist</h2>
+    <h2>Before You Submit</h2>
 
     <div class="checklist">
-      <h3>Before You Submit ✓</h3>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">Task 1 complete — type on path</span>
-          <span class="check-desc">Characters follow a curved or shaped path</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">Task 2 complete — keyboard marks</span>
-          <span class="check-desc">Repeated characters transformed and layered</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">Task 3 complete — symbol brush</span>
-          <span class="check-desc">Symbol brushed along a path</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">All three techniques appear on my A3 design sheet</span>
-          <span class="check-desc">One coherent page combining all three approaches</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">My marks feel connected to my research theme</span>
-          <span class="check-desc">Character choices are deliberate, not generic</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">Harvard references added for all images not my own</span>
-          <span class="check-desc">Artist name, title, date or source under each image</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">Screenshot taken of my graphic elements outcome</span>
-          <span class="check-desc">Cmd+Shift+3 (Mac) or Win+Shift+S (Windows)</span>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-box" onclick="toggleCheck(this)"></div>
-        <div>
-          <span class="check-label">A3 design sheet saved as JPEG</span>
-          <span class="check-desc">File → Export → Export As → JPEG</span>
-        </div>
-      </div>
+      <h3>Portfolio Review Checklist ✓</h3>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Task 1 complete — type on path</span><span class="check-desc">Characters follow a curved or shaped path</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Task 2 complete — keyboard marks</span><span class="check-desc">Repeated characters transformed and layered</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Task 3 complete — symbol brush</span><span class="check-desc">Symbol brushed along a path</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">All three techniques on my A3 design sheet</span><span class="check-desc">One coherent page combining all three approaches</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">My marks feel connected to my research theme</span><span class="check-desc">Character choices are deliberate, not generic</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Harvard references added for all images not my own</span><span class="check-desc">Artist name, title, date or source under each image</span></div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">A3 design sheet saved as JPEG</span><span class="check-desc">File → Export → Export As → JPEG</span></div></div>
     </div>
 
     <div class="diagonal-rule"></div>
 
-    <h2>Portfolio Upload Form</h2>
+    <h2>Progress Report</h2>
 
-    <div class="upload-form">
-      <h4>Progress Report — Graphic Elements Session</h4>
-
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" id="studentName" placeholder="First and last name">
-      </div>
-
-      <div class="form-group">
-        <label>Research Theme</label>
-        <input type="text" id="researchTheme" placeholder="What concept is driving your project?">
-      </div>
-
-      <div class="form-group">
-        <label>Which technique did you find most useful for your theme — and why?</label>
-        <textarea id="reflection1" placeholder="Type on path / keyboard marks / symbol brushes — explain your choice..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>What would you do differently next time?</label>
-        <textarea id="reflection2" placeholder="One thing you would change or develop further..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Upload Screenshot — Graphic Elements Outcome</label>
-        <input type="file" id="screenshotUpload" accept="image/*">
-      </div>
-
-      <div class="form-group">
-        <label>Upload A3 Design Sheet (JPEG)</label>
-        <input type="file" id="a3Upload" accept="image/jpeg,image/jpg">
-      </div>
-
-      <button class="submit-btn" onclick="generateReport()">Download Progress Report PDF</button>
+    <div style="background:var(--gold-light);border:2px solid var(--gold);border-radius:4px;padding:22px;text-align:center;margin:0 0 20px;">
+      <p style="font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">📋 Complete Your Progress Report</p>
+      <p style="font-size:0.84rem;color:var(--concrete);margin-bottom:16px;">Upload a before and after image, rate your confidence, and answer the four reflection questions. Download as PDF to upload to Padlet.</p>
+      <a href="https://hsstokes.github.io/Progress_Documentation/" target="_blank" style="display:inline-block;background:var(--ink);color:white;padding:14px 28px;border-radius:3px;font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--teal)'" onmouseout="this.style.background='var(--ink)'">📝 Open Progress Documentation Tool →</a>
     </div>
 
     <div class="diagonal-rule"></div>
@@ -1324,15 +547,15 @@ footer {
     <div class="portfolio-upload">
       <h3>Upload Three Things</h3>
       <div class="upload-items">
-        <div class="upload-item">📸 Screenshot — graphic elements in Photoshop</div>
+        <div class="upload-item">📸 Screenshot of your Photoshop outcome</div>
         <div class="upload-item">◻ A3 design sheet as JPEG</div>
-        <div class="upload-item">📋 Progress report PDF</div>
+        <div class="upload-item">📋 Progress Report (downloaded above)</div>
       </div>
       <a href="https://artslondon.padlet.org/hstokes12/rotation-2-digital-skills-with-heidi-qeih9t6blwhbn0xg" target="_blank" class="padlet-btn">Submit to Padlet →</a>
     </div>
 
     <div class="info-box">
-      <strong>Harvard referencing reminder:</strong> Any image on your A3 sheet that is not your own work must be referenced. Add the artist name, title, year, and source beneath each image. <a href="https://hsstokes.github.io/Harvard-Referencing-Guide/" target="_blank">See the referencing guide →</a>
+      <strong>Harvard referencing reminder:</strong> Any image on your A3 sheet that is not your own work must be referenced. <a href="https://hsstokes.github.io/Harvard-Referencing-Guide/" target="_blank">See the referencing guide →</a>
     </div>
 
     <div class="nav-btns">
@@ -1343,15 +566,12 @@ footer {
 
 </div>
 
-<!-- MODAL -->
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <span class="modal-close" onclick="closeModal()">×</span>
   <img class="modal-img" id="modalImg">
 </div>
 
-<footer>
-  © 2025 Digital Skills — Creating Graphic Elements for Dynamic Page Design
-</footer>
+<footer>© 2025 Digital Skills — Creating Graphic Elements for Dynamic Page Design</footer>
 
 <script>
 const sections = ['overview','task1','task2','task3','portfolio'];
@@ -1373,11 +593,7 @@ document.querySelectorAll('.nav-block').forEach(b => {
   b.addEventListener('click', () => goTo(b.dataset.sec));
 });
 
-/* CHECKLIST */
-function toggleCheck(el) {
-  el.classList.toggle('checked');
-  saveChecklist();
-}
+function toggleCheck(el) { el.classList.toggle('checked'); saveChecklist(); }
 
 function saveChecklist() {
   const states = Array.from(document.querySelectorAll('.check-box')).map(b => b.classList.contains('checked'));
@@ -1392,7 +608,6 @@ function loadChecklist() {
   });
 }
 
-/* CANVAS */
 function setupCanvas() {
   const canvas = document.getElementById('markMakingCanvas');
   if (!canvas) return;
@@ -1426,17 +641,8 @@ function setupCanvas() {
 
   canvas.addEventListener('mousedown', e => { isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); });
   canvas.addEventListener('touchstart', e => { e.preventDefault(); isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); });
-  canvas.addEventListener('mousemove', e => {
-    if (!isDrawing) return;
-    const [x, y] = getPos(e);
-    if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; }
-  });
-  canvas.addEventListener('touchmove', e => {
-    e.preventDefault();
-    if (!isDrawing) return;
-    const [x, y] = getPos(e);
-    if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; }
-  });
+  canvas.addEventListener('mousemove', e => { if (!isDrawing) return; const [x, y] = getPos(e); if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; } });
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!isDrawing) return; const [x, y] = getPos(e); if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; } });
   canvas.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('touchend', () => isDrawing = false);
 
@@ -1449,64 +655,47 @@ function setupCanvas() {
   });
 
   document.getElementById('characterSelect').addEventListener('change', e => { currentChar = e.target.value; });
-
-  document.getElementById('clearCanvas').addEventListener('click', () => {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  });
-
-  document.getElementById('saveCanvas').addEventListener('click', () => {
-    const a = document.createElement('a');
-    a.download = 'keyboard-marks.png';
-    a.href = canvas.toDataURL();
-    a.click();
-  });
+  document.getElementById('clearCanvas').addEventListener('click', () => { ctx.fillStyle = 'white'; ctx.fillRect(0, 0, canvas.width, canvas.height); });
+  document.getElementById('saveCanvas').addEventListener('click', () => { const a = document.createElement('a'); a.download = 'keyboard-marks.png'; a.href = canvas.toDataURL(); a.click(); });
 }
 
-/* MODAL */
-function openModal(src) {
-  document.getElementById('modalImg').src = src;
-  document.getElementById('modal').style.display = 'block';
-}
-function closeModal() {
-  document.getElementById('modal').style.display = 'none';
-}
+function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('modal').style.display = 'block'; }
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* REPORT GENERATOR */
 function generateReport() {
-  const name = document.getElementById('studentName').value || 'Student';
-  const theme = document.getElementById('researchTheme').value || 'Not specified';
-  const r1 = document.getElementById('reflection1').value || 'Not completed';
-  const r2 = document.getElementById('reflection2').value || 'Not completed';
+  const name = document.getElementById('studentName').value.trim() || 'Student';
+  const theme = document.getElementById('researchTheme').value.trim() || 'Not specified';
+  const r1 = document.getElementById('reflection1').value.trim() || 'Not completed';
+  const r2 = document.getElementById('reflection2').value.trim() || 'Not completed';
 
   const checks = Array.from(document.querySelectorAll('#portfolio .check-box'));
-  const checkLabels = Array.from(document.querySelectorAll('#portfolio .check-label'));
-  let checklistHTML = '';
+  const labels = Array.from(document.querySelectorAll('#portfolio .check-label'));
+  let rows = '';
   checks.forEach((c, i) => {
     const done = c.classList.contains('checked');
-    checklistHTML += `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee;">${done ? '✓' : '○'}</td><td style="padding:6px 10px;border-bottom:1px solid #eee;color:${done?'#0a7a7a':'#888'}">${checkLabels[i]?.textContent || ''}</td></tr>`;
+    rows += `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee;font-size:1rem;">${done ? '✓' : '○'}</td><td style="padding:6px 10px;border-bottom:1px solid #eee;color:${done?'#0a7a7a':'#888'}">${labels[i]?.textContent||''}</td></tr>`;
   });
 
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>Progress Report — ${name}</title>
-  <style>
-    body{font-family:'Courier New',monospace;max-width:700px;margin:40px auto;padding:20px;color:#1a1a1a;}
-    h1{color:#ea37a3;border-bottom:3px solid #0a7a7a;padding-bottom:12px;}
-    h2{color:#0a7a7a;font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;margin-top:28px;}
-    .field{background:#f2ede8;border-left:4px solid #0a7a7a;padding:10px 14px;margin:10px 0;font-size:0.9rem;}
-    table{width:100%;border-collapse:collapse;margin-top:10px;}
-    .footer{margin-top:40px;font-size:0.75rem;color:#aaa;border-top:1px dashed #ccc;padding-top:12px;}
-  </style></head><body>
-  <h1>Progress Report — Graphic Elements Session</h1>
-  <h2>Student</h2><div class="field">${name}</div>
-  <h2>Research Theme</h2><div class="field">${theme}</div>
-  <h2>Reflection — Most Useful Technique</h2><div class="field">${r1}</div>
-  <h2>Reflection — What I Would Do Differently</h2><div class="field">${r2}</div>
-  <h2>Portfolio Checklist</h2>
-  <table>${checklistHTML}</table>
-  <div class="footer">Digital Skills — Creating Graphic Elements · ${new Date().toLocaleDateString('en-GB')}</div>
-  </body></html>`;
+<title>Progress Report — ${name}</title>
+<style>
+  body{font-family:'Courier New',monospace;max-width:700px;margin:40px auto;padding:20px;color:#1a1a1a;}
+  h1{color:#ea37a3;border-bottom:3px solid #0a7a7a;padding-bottom:12px;margin-bottom:20px;}
+  h2{color:#0a7a7a;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-top:28px;margin-bottom:8px;}
+  .field{background:#f2ede8;border-left:4px solid #0a7a7a;padding:10px 14px;margin:8px 0;font-size:0.9rem;line-height:1.6;}
+  table{width:100%;border-collapse:collapse;margin-top:8px;}
+  .foot{margin-top:40px;font-size:0.72rem;color:#aaa;border-top:1px dashed #ccc;padding-top:12px;}
+</style>
+</head><body>
+<h1>Progress Report — Graphic Elements Session</h1>
+<h2>Student</h2><div class="field">${name}</div>
+<h2>Research Theme</h2><div class="field">${theme}</div>
+<h2>Most Useful Technique</h2><div class="field">${r1}</div>
+<h2>What I Would Do Differently</h2><div class="field">${r2}</div>
+<h2>Portfolio Checklist</h2><table>${rows}</table>
+<div class="foot">Digital Skills — Creating Graphic Elements · ${new Date().toLocaleDateString('en-GB')}</div>
+</body></html>`;
 
   const blob = new Blob([html], {type:'text/html'});
   const url = URL.createObjectURL(blob);
@@ -1517,10 +706,7 @@ function generateReport() {
   URL.revokeObjectURL(url);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  setupCanvas();
-  loadChecklist();
-});
+document.addEventListener('DOMContentLoaded', () => { setupCanvas(); loadChecklist(); });
 </script>
 </body>
 </html>
