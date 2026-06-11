@@ -163,8 +163,15 @@ li { font-size: 0.9rem; margin-bottom: 6px; }
 
 .path-preview { border: 2px solid var(--warm-mid); border-radius: 4px; padding: 16px; margin: 18px 0; background: white; text-align: center; }
 
+/* CANVAS */
 .canvas-wrap { border: 2px solid var(--ink); border-radius: 4px; overflow: hidden; margin: 16px 0; }
-#markMakingCanvas { background: white; cursor: crosshair; touch-action: none; width: 100%; display: block; }
+#markMakingCanvas {
+  background: white;
+  cursor: crosshair;
+  touch-action: none;
+  display: block;
+  /* width/height set by JS only — no CSS sizing */
+}
 .canvas-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background: var(--teal-light); border-top: 2px solid var(--ink); align-items: center; }
 .btn { padding: 8px 16px; border: 2px solid var(--ink); border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; background: white; color: var(--ink); }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
@@ -174,6 +181,7 @@ li { font-size: 0.9rem; margin-bottom: 6px; }
 .color-dot:hover { transform: scale(1.15); }
 .color-dot.selected { border: 3px solid var(--ink); transform: scale(1.15); }
 select { padding: 6px 10px; border: 2px solid var(--ink); border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 0.72rem; background: white; cursor: pointer; }
+.canvas-hint { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--concrete); padding: 6px 12px; background: var(--teal-light); text-align: center; border-top: 1px dashed var(--warm-mid); }
 
 .checklist { background: white; border: 2px solid var(--teal); border-radius: 4px; padding: 22px; margin: 25px 0; }
 .checklist h3 { color: var(--teal); text-align: center; border-bottom: 2px dashed var(--teal); padding-bottom: 12px; margin-bottom: 16px; font-size: 0.8rem; }
@@ -184,65 +192,6 @@ select { padding: 6px 10px; border: 2px solid var(--ink); border-radius: 3px; fo
 .check-box.checked::after { content: '✓'; position: absolute; color: white; font-size: 13px; font-weight: 700; top: 0px; left: 3px; }
 .check-label { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--teal); display: block; }
 .check-desc { font-size: 0.78rem; color: var(--concrete); margin-top: 2px; }
-
-/* PROGRESS REPORT FORM */
-.report-form {
-  background: var(--gold-light);
-  border: 2px solid var(--gold);
-  border-radius: 4px;
-  padding: 22px;
-  margin: 20px 0;
-}
-.report-form h4 {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 18px;
-}
-.form-group { margin-bottom: 14px; }
-.form-group label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--ink);
-  display: block;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.form-group input[type="text"],
-.form-group textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 2px solid var(--warm-mid);
-  border-radius: 3px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem;
-  background: white;
-  transition: border-color 0.2s;
-}
-.form-group input[type="text"]:focus,
-.form-group textarea:focus { border-color: var(--teal); outline: none; }
-.form-group textarea { resize: vertical; min-height: 80px; }
-.submit-btn {
-  background: var(--ink);
-  color: white;
-  padding: 14px 32px;
-  border-radius: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-  margin-top: 8px;
-}
-.submit-btn:hover { background: var(--teal); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
 .portfolio-upload { background: white; border: 3px dashed var(--gold); border-radius: 4px; padding: 28px; margin: 25px 0; text-align: center; }
 .portfolio-upload h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 12px; }
@@ -295,7 +244,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     <div class="nav-block" data-sec="portfolio"><span class="nav-icon">📋</span><span class="nav-label">Portfolio</span><span class="nav-sub">Review & submit</span></div>
   </div>
 
-  <!-- ═══ OVERVIEW ═══ -->
+  <!-- OVERVIEW -->
   <div id="overview" class="section active">
     <div class="section-banner banner-overview">Session Overview</div>
     <p>In this session you will learn three techniques for creating graphic elements in Photoshop. These marks do real work on the page — connecting images, guiding the reader's eye, and giving your design a visual voice.</p>
@@ -334,7 +283,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     </div>
   </div>
 
-  <!-- ═══ TASK 1 ═══ -->
+  <!-- TASK 1 -->
   <div id="task1" class="section">
     <div class="section-banner banner-t1">Task 1 — Type on Path</div>
     <p>Place repeated characters along a curved path to create marks that feel like movement, flow, or structure. The path shape itself carries meaning.</p>
@@ -391,7 +340,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     </div>
   </div>
 
-  <!-- ═══ TASK 2 ═══ -->
+  <!-- TASK 2 -->
   <div id="task2" class="section">
     <div class="section-banner banner-t2">Task 2 — Keyboard Mark-Making</div>
     <p>Use repeated keyboard characters as visual texture and marks. Different characters carry different energy — choose ones that feel like your research theme.</p>
@@ -423,7 +372,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     </div>
     <div class="diagonal-rule"></div>
     <h2>Try It Here</h2>
-    <p>Draw with keyboard characters on the canvas below:</p>
+    <p>Draw with keyboard characters on the canvas below — hold and drag to paint marks:</p>
     <div style="margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
       <select id="characterSelect">
         <option value="*">* Asterisk</option>
@@ -437,7 +386,8 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
       </select>
     </div>
     <div class="canvas-wrap">
-      <canvas id="markMakingCanvas" height="360"></canvas>
+      <canvas id="markMakingCanvas"></canvas>
+      <div class="canvas-hint">Click and drag to draw · change character and colour below</div>
       <div class="canvas-controls">
         <div class="color-picker">
           <div class="color-dot selected" style="background:#1a1a1a" data-color="#1a1a1a"></div>
@@ -473,7 +423,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     </div>
   </div>
 
-  <!-- ═══ TASK 3 ═══ -->
+  <!-- TASK 3 -->
   <div id="task3" class="section">
     <div class="section-banner banner-t3">Task 3 — Symbol Brushes</div>
     <p>Turn any character into a custom brush and paint it along a path. Repeating symbols create rhythm, pattern, and visual texture.</p>
@@ -508,17 +458,12 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     </div>
   </div>
 
-  <!-- ═══ PORTFOLIO REVIEW ═══ -->
+  <!-- PORTFOLIO -->
   <div id="portfolio" class="section">
-
     <div class="section-banner banner-portfolio">Portfolio Review & Submission</div>
-
     <p>Review your work using the checklist, complete your progress report, then upload to Padlet.</p>
-
     <div class="diagonal-rule"></div>
-
     <h2>Before You Submit</h2>
-
     <div class="checklist">
       <h3>Portfolio Review Checklist ✓</h3>
       <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Task 1 complete — type on path</span><span class="check-desc">Characters follow a curved or shaped path</span></div></div>
@@ -529,21 +474,15 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
       <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">Harvard references added for all images not my own</span><span class="check-desc">Artist name, title, date or source under each image</span></div></div>
       <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">A3 design sheet saved as JPEG</span><span class="check-desc">File → Export → Export As → JPEG</span></div></div>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>Progress Report</h2>
-
     <div style="background:var(--gold-light);border:2px solid var(--gold);border-radius:4px;padding:22px;text-align:center;margin:0 0 20px;">
       <p style="font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">📋 Complete Your Progress Report</p>
       <p style="font-size:0.84rem;color:var(--concrete);margin-bottom:16px;">Upload a before and after image, rate your confidence, and answer the four reflection questions. Download as PDF to upload to Padlet.</p>
       <a href="https://hsstokes.github.io/Progress_Documentation/" target="_blank" style="display:inline-block;background:var(--ink);color:white;padding:14px 28px;border-radius:3px;font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--teal)'" onmouseout="this.style.background='var(--ink)'">📝 Open Progress Documentation Tool →</a>
     </div>
-
     <div class="diagonal-rule"></div>
-
     <h2>Submit to Padlet</h2>
-
     <div class="portfolio-upload">
       <h3>Upload Three Things</h3>
       <div class="upload-items">
@@ -553,11 +492,9 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
       </div>
       <a href="https://artslondon.padlet.org/hstokes12/rotation-2-digital-skills-with-heidi-qeih9t6blwhbn0xg" target="_blank" class="padlet-btn">Submit to Padlet →</a>
     </div>
-
     <div class="info-box">
       <strong>Harvard referencing reminder:</strong> Any image on your A3 sheet that is not your own work must be referenced. <a href="https://hsstokes.github.io/Harvard-Referencing-Guide/" target="_blank">See the referencing guide →</a>
     </div>
-
     <div class="nav-btns">
       <button class="btn-nav btn-prev" onclick="goTo('task3')">← Task 3</button>
       <button class="btn-nav btn-next" onclick="goTo('overview')">↩ Back to Start</button>
@@ -587,6 +524,8 @@ function goTo(id) {
   document.getElementById('progressBar').style.width = pct + '%';
   window.scrollTo({top: 0, behavior: 'smooth'});
   saveChecklist();
+  /* Re-size canvas if navigating to task2 */
+  if (id === 'task2') setTimeout(initCanvas, 50);
 }
 
 document.querySelectorAll('.nav-block').forEach(b => {
@@ -597,38 +536,72 @@ function toggleCheck(el) { el.classList.toggle('checked'); saveChecklist(); }
 
 function saveChecklist() {
   const states = Array.from(document.querySelectorAll('.check-box')).map(b => b.classList.contains('checked'));
-  localStorage.setItem('graphic-elements-checklist', JSON.stringify(states));
+  try { localStorage.setItem('graphic-elements-checklist', JSON.stringify(states)); } catch(e){}
 }
 
 function loadChecklist() {
-  const saved = localStorage.getItem('graphic-elements-checklist');
-  if (!saved) return;
-  JSON.parse(saved).forEach((v, i) => {
-    if (v) document.querySelectorAll('.check-box')[i]?.classList.add('checked');
-  });
+  try {
+    const saved = localStorage.getItem('graphic-elements-checklist');
+    if (!saved) return;
+    JSON.parse(saved).forEach((v, i) => {
+      if (v) document.querySelectorAll('.check-box')[i]?.classList.add('checked');
+    });
+  } catch(e){}
 }
 
-function setupCanvas() {
+/* ── CANVAS ── */
+let canvasReady = false;
+
+function initCanvas() {
+  if (canvasReady) return;
   const canvas = document.getElementById('markMakingCanvas');
   if (!canvas) return;
+
   const ctx = canvas.getContext('2d');
-  let isDrawing = false, lastX = 0, lastY = 0;
+  let isDrawing = false;
+  let lastX = 0, lastY = 0;
   let currentColor = '#1a1a1a';
   let currentChar = '*';
 
-  function resize() {
+  /* Set canvas pixel dimensions to match its actual rendered width */
+  function setSize() {
     const w = canvas.parentElement.clientWidth;
-    canvas.width = w;
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-  resize();
-  window.addEventListener('resize', resize);
+    const h = 360;
+    /* Preserve existing drawing by copying to temp canvas */
+    const tmp = document.createElement('canvas');
+    tmp.width = canvas.width || w;
+    tmp.height = canvas.height || h;
+    const tctx = tmp.getContext('2d');
+    tctx.drawImage(canvas, 0, 0);
 
+    canvas.width = w;
+    canvas.height = h;
+
+    /* Restore white background then redraw previous content */
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, w, h);
+    if (tmp.width > 0) ctx.drawImage(tmp, 0, 0, w, h);
+  }
+
+  setSize();
+  /* Debounced resize — only adjusts if significantly different */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setSize, 200);
+  });
+
+  /* Accurate position helper — works even when CSS transforms scale the canvas */
   function getPos(e) {
-    const r = canvas.getBoundingClientRect();
-    if (e.touches) return [e.touches[0].clientX - r.left, e.touches[0].clientY - r.top];
-    return [e.offsetX, e.offsetY];
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width  / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return [
+      (clientX - rect.left) * scaleX,
+      (clientY - rect.top)  * scaleY
+    ];
   }
 
   function drawChar(x, y) {
@@ -639,12 +612,24 @@ function setupCanvas() {
     ctx.fillText(currentChar, x, y);
   }
 
-  canvas.addEventListener('mousedown', e => { isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); });
-  canvas.addEventListener('touchstart', e => { e.preventDefault(); isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); });
-  canvas.addEventListener('mousemove', e => { if (!isDrawing) return; const [x, y] = getPos(e); if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; } });
-  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!isDrawing) return; const [x, y] = getPos(e); if (Math.hypot(x-lastX, y-lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; } });
-  canvas.addEventListener('mouseup', () => isDrawing = false);
-  canvas.addEventListener('touchend', () => isDrawing = false);
+  canvas.addEventListener('mousedown',  e => { isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); });
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); isDrawing = true; [lastX, lastY] = getPos(e); drawChar(lastX, lastY); }, { passive: false });
+
+  canvas.addEventListener('mousemove',  e => {
+    if (!isDrawing) return;
+    const [x, y] = getPos(e);
+    if (Math.hypot(x - lastX, y - lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; }
+  });
+  canvas.addEventListener('touchmove',  e => {
+    e.preventDefault();
+    if (!isDrawing) return;
+    const [x, y] = getPos(e);
+    if (Math.hypot(x - lastX, y - lastY) > 14) { drawChar(x, y); lastX = x; lastY = y; }
+  }, { passive: false });
+
+  canvas.addEventListener('mouseup',   () => isDrawing = false);
+  canvas.addEventListener('mouseleave',() => isDrawing = false);
+  canvas.addEventListener('touchend',  () => isDrawing = false);
 
   document.querySelectorAll('.color-dot').forEach(d => {
     d.addEventListener('click', () => {
@@ -655,58 +640,31 @@ function setupCanvas() {
   });
 
   document.getElementById('characterSelect').addEventListener('change', e => { currentChar = e.target.value; });
-  document.getElementById('clearCanvas').addEventListener('click', () => { ctx.fillStyle = 'white'; ctx.fillRect(0, 0, canvas.width, canvas.height); });
-  document.getElementById('saveCanvas').addEventListener('click', () => { const a = document.createElement('a'); a.download = 'keyboard-marks.png'; a.href = canvas.toDataURL(); a.click(); });
+
+  document.getElementById('clearCanvas').addEventListener('click', () => {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  });
+
+  document.getElementById('saveCanvas').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.download = 'keyboard-marks.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  });
+
+  canvasReady = true;
 }
 
 function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('modal').style.display = 'block'; }
 function closeModal() { document.getElementById('modal').style.display = 'none'; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-function generateReport() {
-  const name = document.getElementById('studentName').value.trim() || 'Student';
-  const theme = document.getElementById('researchTheme').value.trim() || 'Not specified';
-  const r1 = document.getElementById('reflection1').value.trim() || 'Not completed';
-  const r2 = document.getElementById('reflection2').value.trim() || 'Not completed';
-
-  const checks = Array.from(document.querySelectorAll('#portfolio .check-box'));
-  const labels = Array.from(document.querySelectorAll('#portfolio .check-label'));
-  let rows = '';
-  checks.forEach((c, i) => {
-    const done = c.classList.contains('checked');
-    rows += `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee;font-size:1rem;">${done ? '✓' : '○'}</td><td style="padding:6px 10px;border-bottom:1px solid #eee;color:${done?'#0a7a7a':'#888'}">${labels[i]?.textContent||''}</td></tr>`;
-  });
-
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<title>Progress Report — ${name}</title>
-<style>
-  body{font-family:'Courier New',monospace;max-width:700px;margin:40px auto;padding:20px;color:#1a1a1a;}
-  h1{color:#ea37a3;border-bottom:3px solid #0a7a7a;padding-bottom:12px;margin-bottom:20px;}
-  h2{color:#0a7a7a;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-top:28px;margin-bottom:8px;}
-  .field{background:#f2ede8;border-left:4px solid #0a7a7a;padding:10px 14px;margin:8px 0;font-size:0.9rem;line-height:1.6;}
-  table{width:100%;border-collapse:collapse;margin-top:8px;}
-  .foot{margin-top:40px;font-size:0.72rem;color:#aaa;border-top:1px dashed #ccc;padding-top:12px;}
-</style>
-</head><body>
-<h1>Progress Report — Graphic Elements Session</h1>
-<h2>Student</h2><div class="field">${name}</div>
-<h2>Research Theme</h2><div class="field">${theme}</div>
-<h2>Most Useful Technique</h2><div class="field">${r1}</div>
-<h2>What I Would Do Differently</h2><div class="field">${r2}</div>
-<h2>Portfolio Checklist</h2><table>${rows}</table>
-<div class="foot">Digital Skills — Creating Graphic Elements · ${new Date().toLocaleDateString('en-GB')}</div>
-</body></html>`;
-
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `progress-report-${name.replace(/\s+/g,'-').toLowerCase()}.html`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-document.addEventListener('DOMContentLoaded', () => { setupCanvas(); loadChecklist(); });
+document.addEventListener('DOMContentLoaded', () => {
+  loadChecklist();
+  /* Init canvas immediately if task2 is somehow the landing tab, else on first visit */
+  if (current === 'task2') initCanvas();
+});
 </script>
 </body>
 </html>
