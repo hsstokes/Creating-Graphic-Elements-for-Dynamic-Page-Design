@@ -216,6 +216,18 @@ select { padding: 6px 10px; border: 2px solid var(--ink); border-radius: 3px; fo
 footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--warm-mid); margin-top: 40px; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--concrete); }
 
 @media (max-width: 600px) { .container { padding: 24px 16px 40px; } .site-header { grid-template-columns: 1fr; } .header-meta { text-align: left; } }
+
+/* ---------- Stuck? troubleshooting ---------- */
+.stuck { background:#fff; border:2px solid var(--ink); margin:20px 0; }
+.stuck .stuck-head { background:var(--ink); color:#fff; font-family:'Space Mono',monospace; font-weight:700; padding:10px 16px; }
+.stuck .row { display:grid; grid-template-columns:1fr 1.4fr; border-top:1px dashed #d4cfc8; }
+.stuck .row:first-of-type { border-top:0; }
+.stuck .prob, .stuck .fix { padding:10px 16px; font-size:0.92rem; line-height:1.6; }
+.stuck .prob { font-weight:600; background:var(--paper); }
+.stuck .prob::before { content:"✗ "; color:#c62828; }
+.stuck .fix::before { content:"→ "; color:var(--teal); font-weight:700; }
+.skey { font-family:'Space Mono',monospace; font-size:0.8rem; background:#fff; border:2px solid var(--ink); border-bottom-width:4px; padding:0 6px; white-space:nowrap; }
+@media (max-width:600px){ .stuck .row{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -332,6 +344,13 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
       </svg>
       <p style="font-size:0.72rem;color:var(--concrete);margin-top:8px;margin-bottom:0;font-style:italic;">Live preview — two characters on different paths</p>
     </div>
+    <div class="stuck">
+      <div class="stuck-head">🆘 Stuck? Try this</div>
+      <div class="row"><div class="prob">The Pen Tool makes a filled shape.</div><div class="fix">In the top bar, change <strong>Shape</strong> to <strong>Path</strong>.</div></div>
+      <div class="row"><div class="prob">My text is in a box, not on the path.</div><div class="fix">Undo <span class="skey">Cmd/Ctrl</span> + <span class="skey">Z</span>. Hover exactly on the line until the cursor changes. Then click.</div></div>
+      <div class="row"><div class="prob">My characters stop before the end.</div><div class="fix">The path is full. Make the font smaller, or draw a longer path.</div></div>
+      <div class="row"><div class="prob">Still stuck in the online class?</div><div class="fix">Type your question in the <strong>Teams chat</strong>, or ask to <strong>share your screen</strong>.</div></div>
+    </div>
     <div class="checklist">
       <h3>Task 1 Checklist ✓</h3>
       <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have created a curved path with the Pen Tool</span><span class="check-desc">Click and drag to make curves, not just straight lines</span></div></div>
@@ -415,6 +434,13 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
         <div class="step-block"><div class="step-num">4</div><div><div class="step-title">Layer and overlap</div><p>Duplicate the layer, change the colour, rotate slightly differently. Overlapping layers create depth.</p></div></div>
       </div>
     </div>
+    <div class="stuck">
+      <div class="stuck-head">🆘 Stuck? Try this</div>
+      <div class="row"><div class="prob">My characters look uneven.</div><div class="fix">Use a monospaced font, e.g. <strong>Courier New</strong> or <strong>Space Mono</strong>.</div></div>
+      <div class="row"><div class="prob">New text joins my old text layer.</div><div class="fix">Hold <span class="skey">Shift</span> and click to start a new text layer.</div></div>
+      <div class="row"><div class="prob">I can’t skew the text.</div><div class="fix">In Free Transform, right-click inside the box › <strong>Skew</strong>.</div></div>
+      <div class="row"><div class="prob">Still stuck in the online class?</div><div class="fix">Type your question in the <strong>Teams chat</strong>, or ask to <strong>share your screen</strong>.</div></div>
+    </div>
     <div class="checklist">
       <h3>Task 2 Checklist ✓</h3>
       <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><span class="check-label">I have tried at least three different characters</span><span class="check-desc">See how each one feels different on the page</span></div></div>
@@ -449,6 +475,14 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     <div class="tip-box">
       <h4>💡 Good symbols to try as brushes</h4>
       <p style="margin:0;">★ ✦ → ◆ ✕ ○ ▲ — each creates a very different visual rhythm. Choose one that responds to your research theme.</p>
+    </div>
+    <div class="stuck">
+      <div class="stuck-head">🆘 Stuck? Try this</div>
+      <div class="row"><div class="prob">My brush is huge, or the symbol is off-centre.</div><div class="fix">Select only your character with the Rectangular Marquee <span class="skey">M</span>. Then <strong>Edit › Define Brush Preset</strong>.</div></div>
+      <div class="row"><div class="prob">The symbols overlap.</div><div class="fix">Open Brush Settings <span class="skey">F5</span>. Increase <strong>Spacing</strong> to 100–200%.</div></div>
+      <div class="row"><div class="prob">Stroke Path uses the wrong brush.</div><div class="fix">Choose the Brush Tool <span class="skey">B</span> and select your symbol brush <strong>first</strong>. Then right-click the path › Stroke Path.</div></div>
+      <div class="row"><div class="prob">Nothing appears after Stroke Path.</div><div class="fix">Make a new layer first. In the Stroke Path window choose <strong>Tool: Brush</strong>.</div></div>
+      <div class="row"><div class="prob">Still stuck in the online class?</div><div class="fix">Type your question in the <strong>Teams chat</strong>, or ask to <strong>share your screen</strong>.</div></div>
     </div>
     <div class="checklist">
       <h3>Task 3 Checklist ✓</h3>
@@ -491,7 +525,7 @@ footer { text-align: center; padding: 20px 0 10px; border-top: 1px dashed var(--
     <div class="portfolio-upload">
       <h3>Upload Three Things</h3>
       <div class="upload-items">
-        <div class="upload-item">📸 Screenshot of your Photoshop outcome</div>
+        <div class="upload-item">📸 Process JPEG of your Photoshop work</div>
         <div class="upload-item">◻ A3 page as JPEG</div>
         <div class="upload-item">📋 Progress Report (downloaded above)</div>
       </div>
